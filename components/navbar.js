@@ -22,7 +22,7 @@ export default function navbar({ sidebarLabel }) {
         </label>
       </div>
       <div className="navbar-center flex-1 mx-1 invisible sm:visible">
-        <img src="/kokoa-logo.png" alt="kokoa" className="h-10 w-10 mr-2" />
+        <img src={process.env.BACKEND_URL + "/kokoa-logo.png"} alt="kokoa" className="h-10 w-10 mr-2" />
         <span className="text-lg font-bold">Kokoa</span>
       </div>
       <div className="flex-none ">
