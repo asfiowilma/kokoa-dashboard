@@ -33,7 +33,7 @@ export default function navbar({ sidebarLabel }) {
       <div className="flex-none">
         <div className="avatar">
           <div className="rounded-full w-10 h-10 m-1">
-            <img src="/avatar.png" />
+            <img src={process.env.BACKEND_URL + "/avatar.png"} />
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@ function NavLink({ href, exact, children, ...props }) {
   }
 
   return (
-    <Link href={href}>
+    <Link href={href} as={process.env.BACKEND_URL + href}>
       <a {...props}>{children}</a>
     </Link>
   );

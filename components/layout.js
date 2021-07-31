@@ -8,8 +8,8 @@ export default function Layout({ children, labelName }) {
   return (
     <div>
       <Head>
-        <title>Kokoa</title>
-        <link rel="icon" href="/kokoa-favicon.png" />
+        <title>Kokoa</title>}
+        <link rel="icon" href={process.env.BACKEND_URL + '/kokoa-favicon.png'} />
       </Head>
 
       <div className="flex flex-col items-center w-full min-h-screen h-screen bg-neutral">
