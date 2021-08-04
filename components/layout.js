@@ -20,7 +20,7 @@ export default function Layout({ children, labelName }) {
             <main className="flex w-full flex-1 items-start">{children}</main>
           </div>
           <div className="drawer-side">
-            <label for={labelName} className="drawer-overlay"></label>
+            <label htmlFor={labelName} className="drawer-overlay"></label>
             <Sidebar />
           </div>
         </div>

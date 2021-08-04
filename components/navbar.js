@@ -5,7 +5,7 @@ export default function navbar({ sidebarLabel }) {
   return (
     <div className="navbar w-full mb-4 px-0 lg:px-4 shadow-lg bg-base-100 text-base-content rounded-box shadow-lg">
       <div className="flex-none flex lg:hidden drawer-button">
-        <label for={sidebarLabel} className="btn btn-square btn-ghost">
+        <label htmlFor={sidebarLabel} className="btn btn-square btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

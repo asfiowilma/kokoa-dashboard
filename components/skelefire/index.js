@@ -31,7 +31,7 @@ export default function Index() {
             </div>
             <div>
               <div className="dropdown dropdown-end dropdown-hover">
-                <div tabindex="0" className="m-1 btn btn-sm btn-ghost">
+                <div tabIndex="0" className="m-1 btn btn-sm btn-ghost">
                   Actions
                 </div>
                 <ul className="shadow menu dropdown-content bg-primary text-primary-content rounded-box w-52 text-base">
