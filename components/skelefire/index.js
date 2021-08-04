@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 
 import { GiFire } from "react-icons/gi";
-import ActivityTable from "./activityTable"
-import {getSkelefire} from "./"
+import ActivityTable from "./activityTable";
+import { getActiveCourses, getSkelefire } from "@api/skelefire";
+import { SkelefireContext } from "@context/SkelefireContext";
 
-export default function skelefire() { 
+export default function Index() {
+  const { skelefire, setCourses, setActivities } = useContext(SkelefireContext);
+
+  useEffect(() => {
+    getActiveCourses().then((courses) => setCourses(courses));
+  }, [])
+
   const refreshSkelefire = () => {
     getSkelefire();
-  }
+  };
+
   return (
     <div className="w-full flex flex-col space-y-4 h-full">
       <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-6 md:grid-rows-none gap-4">
-        {matkul.map((a) => (
+        {skelefire.courses.map((a) => (
           <a className="btn bg-accent text-accent-content rounded-box">{a}</a>
         ))}
       </div>
@@ -22,11 +30,11 @@ export default function skelefire() {
               <GiFire className="w-6 h-6 mr-2" /> Skelefire{" "}
             </div>
             <div>
-              <div class="dropdown dropdown-end dropdown-hover">
-                <div tabindex="0" class="m-1 btn btn-sm btn-ghost">
+              <div className="dropdown dropdown-end dropdown-hover">
+                <div tabindex="0" className="m-1 btn btn-sm btn-ghost">
                   Actions
                 </div>
-                <ul class="shadow menu dropdown-content bg-primary text-primary-content rounded-box w-52 text-base">
+                <ul className="shadow menu dropdown-content bg-primary text-primary-content rounded-box w-52 text-base">
                   <li>
                     <a>Mark selected as read</a>
                   </li>
@@ -36,18 +44,20 @@ export default function skelefire() {
                 </ul>
               </div>
 
-              <button onClick={refreshSkelefire} class="btn btn-sm btn-ghost">refresh</button>
+              <button onClick={refreshSkelefire} className="btn btn-sm btn-ghost">
+                refresh
+              </button>
             </div>
           </div>
-          <div class="tabs">
-            {matkul.map((a, i) => (
-              <a class={`indicator tab tab-lifted ${i === 0 && "tab-active"}`}>
-                {a} <div class="indicator-item badge">8</div>
+          <div className="tabs">
+            {skelefire.courses.map((a, i) => (
+              <a className={`indicator tab tab-lifted ${i === 0 && "tab-active"}`}>
+                {a} <div className="indicator-item badge">8</div>
               </a>
             ))}
-            <div class="flex-1 tab tab-lifted cursor-default"></div>
+            <div className="flex-1 tab tab-lifted cursor-default"></div>
           </div>
-          <ActivityTable {...{matkul}}/>
+          <ActivityTable />
         </div>
       </div>
     </div>

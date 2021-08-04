@@ -9,7 +9,7 @@ export default function strawberryCard() {
           <div className="flex items-center">
             <GiStrawberry className="w-6 h-6 mr-2" /> Strawberry{" "}
           </div>
-          <button class="btn btn-sm btn-ghost">refresh</button>
+          <button className="btn btn-sm btn-ghost">refresh</button>
         </div>
         <div className="alert flex justify-between items-center">
           <div>New Offers</div>

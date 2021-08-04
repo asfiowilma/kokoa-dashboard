@@ -11,11 +11,11 @@ export default function skelefireCard({ matkul }) {
             <GiFire className="w-6 h-6 mr-2" /> Skelefire{" "}
           </div>
           <div>
-            <div class="dropdown dropdown-end dropdown-hover">
-              <div tabindex="0" class="m-1 btn btn-sm btn-ghost">
+            <div className="dropdown dropdown-end dropdown-hover">
+              <div tabindex="0" className="m-1 btn btn-sm btn-ghost">
                 Actions
               </div>
-              <ul class="shadow menu dropdown-content bg-primary text-primary-content rounded-box w-52 text-base">
+              <ul className="shadow menu dropdown-content bg-primary text-primary-content rounded-box w-52 text-base">
                 <li>
                   <a>Mark selected as read</a>
                 </li>
@@ -25,23 +25,23 @@ export default function skelefireCard({ matkul }) {
               </ul>
             </div>
 
-            <button class="btn btn-sm btn-ghost">refresh</button>
+            <button className="btn btn-sm btn-ghost">refresh</button>
           </div>
         </div>
-        <div class="tabs">
+        <div className="tabs">
           {matkul.map((a, i) => (
-            <a class={`indicator tab tab-lifted ${i === 0 && "tab-active"}`}>
-              {a} <div class="indicator-item badge">8</div>
+            <a className={`indicator tab tab-lifted ${i === 0 && "tab-active"}`}>
+              {a} <div className="indicator-item badge">8</div>
             </a>
           ))}
-          <div class="flex-1 tab tab-lifted cursor-default"></div>
+          <div className="flex-1 tab tab-lifted cursor-default"></div>
         </div>
-        <div class="overflow-x-auto overflow-auto max-h-80 scrollbar scrollbar-hidden hover:scrollbar-width-1 hover:scrollbar-track-transparent hover:scrollbar-thumb-yellow-600 hover:scrollbar-track-radius-full pr-1.5">
-          <table class="table table-compact w-full">
+        <div className="overflow-x-auto overflow-auto max-h-80 scrollbar scrollbar-hidden hover:scrollbar-width-1 hover:scrollbar-track-transparent hover:scrollbar-thumb-yellow-600 hover:scrollbar-track-radius-full pr-1.5">
+          <table className="table table-compact w-full">
             <thead>
               <tr>
                 <th>
-                  <input type="checkbox" class="checkbox checkbox-xs" />
+                  <input type="checkbox" className="checkbox checkbox-xs" />
                 </th>
                 <th>Course</th>
                 <th>Activity Name</th>
@@ -52,10 +52,10 @@ export default function skelefireCard({ matkul }) {
             <tbody>
               <tr>
                 <td>
-                  <input type="checkbox" class="checkbox checkbox-xs" />
+                  <input type="checkbox" className="checkbox checkbox-xs" />
                 </td>
                 <td>
-                  <div class="badge badge-accent">DAA</div>
+                  <div className="badge badge-accent">DAA</div>
                 </td>
                 <td className="max-w-snippet truncate">
                   Lollipop caramels icing jelly sesame snaps liquorice gummies jelly-o candy canes.
@@ -65,7 +65,7 @@ export default function skelefireCard({ matkul }) {
                 </td>
                 <td>1 day ago</td>
                 <td>
-                  <button class="btn btn-sm btn-ghost">
+                  <button className="btn btn-sm btn-ghost">
                     <VscMailRead />
                   </button>
                 </td>

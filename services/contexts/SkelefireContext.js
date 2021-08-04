@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 const SkelefireContext = createContext(INITIAL_STATE);
 
 const SkelefireProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(SkelefireReducer, INITIAL_STATE);
+  const [skelefire, dispatch] = useReducer(SkelefireReducer, INITIAL_STATE);
 
   const setCourses = (courses) => {
     dispatch({
@@ -26,7 +26,7 @@ const SkelefireProvider = ({ children }) => {
   };
 
   return (
-    <SkelefireContext.Provider value={{ state, setCourses, setActivities }}>
+    <SkelefireContext.Provider value={{ skelefire, setCourses, setActivities }}>
       {children}
     </SkelefireContext.Provider>
   );

@@ -9,7 +9,7 @@ export default function matchaCard({ matkul }) {
           <div className="flex items-center">
             <SiGitea className="w-6 h-6 mr-2" /> Matcha
           </div>
-          <button class="btn btn-sm btn-ghost">refresh</button>
+          <button className="btn btn-sm btn-ghost">refresh</button>
         </div>
         <div className="card bordered max-h-28 overflow-y-auto scrollbar scrollbar-hidden">
           <table className="table table-compact w-full text-center">
