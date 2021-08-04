@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "./navLink";
+import { NavLink } from "./NavLink";
 import { AiFillHome, AiFillSetting } from "react-icons/ai";
 import { GiFire, GiCakeSlice, GiStrawberry } from "react-icons/gi";
 import { SiGitea } from "react-icons/si";

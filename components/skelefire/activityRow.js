@@ -5,7 +5,7 @@ export default function activityRow() {
   return (
     <tr>
       <td>
-        <input type="checkbox" class="checkbox checkbox-xs" />
+        <input type="checkbox" class="checkbox checkbox-sm" />
       </td>
       <td>
         <div class="badge badge-accent">DAA</div>

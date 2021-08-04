@@ -10,7 +10,7 @@ export default function activityTable({ matkul }) {
         <thead className="sticky top-0 z-20">
           <tr>
             <th>
-              <input type="checkbox" class="checkbox checkbox-xs" />
+              <input type="checkbox" class="checkbox checkbox-sm" />
             </th>
             <th>Course</th>
             <th className="text-left">Activity Name</th>

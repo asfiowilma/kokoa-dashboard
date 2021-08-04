@@ -1,8 +1,8 @@
 import React from "react";
 import Head from "next/head";
 
-import Navbar from "./navbar";
-import Sidebar from "./sidebar";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
 export default function Layout({ children, labelName }) {
   return (

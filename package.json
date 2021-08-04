@@ -8,6 +8,7 @@
     "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "daisyui": "^1.10.0",
     "next": "latest",
     "react": "^17.0.2",
