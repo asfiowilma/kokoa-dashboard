@@ -2,9 +2,12 @@ import React from "react";
 
 import { GiFire } from "react-icons/gi";
 import ActivityTable from "./activityTable"
+import {getSkelefire} from "./"
 
-export default function skelefire() {
-  const matkul = ["All", "Gamedev", "Gamedev", "Gamedev", "Gamedev", "Gamedev"];
+export default function skelefire() { 
+  const refreshSkelefire = () => {
+    getSkelefire();
+  }
   return (
     <div className="w-full flex flex-col space-y-4 h-full">
       <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-6 md:grid-rows-none gap-4">
@@ -33,7 +36,7 @@ export default function skelefire() {
                 </ul>
               </div>
 
-              <button class="btn btn-sm btn-ghost">refresh</button>
+              <button onClick={refreshSkelefire} class="btn btn-sm btn-ghost">refresh</button>
             </div>
           </div>
           <div class="tabs">
