@@ -1,10 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from 'react'
+import { SkelefireContext } from '@context/SkelefireContext'
 
-import ActivityRow from "./activityRow";
-import { SkelefireContext } from "@context/SkelefireContext";
+import ActivityRow from './activityRow'
 
-export default function activityTable() {
-  const { skelefire } = useContext(SkelefireContext);
+export default function ActivityTable({ activities, isOverview }) {
+  const { skelefire, setActivities } = useContext(SkelefireContext)
+
+  const [isSelectedAll, setSelectAll] = useState(
+    skelefire.activities.every((a) => a.selected)
+  )
+
+  const selectActivity = () => {
+    setSelectAll(!isSelectedAll)
+    setActivities(
+      skelefire.activities.map((a) => ({ ...a, selected: isSelectedAll }))
+    )
+  }
 
   return (
     <div className="overflow-auto max-h-80 scrollbar scrollbar-hidden hover:scrollbar-width-1 hover:scrollbar-track-transparent hover:scrollbar-thumb-yellow-600 hover:scrollbar-track-radius-full pr-1.5">
@@ -12,7 +23,13 @@ export default function activityTable() {
         <thead className="sticky top-0 z-20">
           <tr>
             <th>
-              <input type="checkbox" className="checkbox checkbox-sm" />
+              <input
+                type="checkbox"
+                checked={skelefire.activities.every((a) => a.selected)}
+                onClick={selectActivity}
+                readOnly
+                className="checkbox checkbox-sm"
+              />
             </th>
             <th>Course</th>
             <th className="text-left">Activity Name</th>
@@ -20,12 +37,27 @@ export default function activityTable() {
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          {skelefire.activities.map((a) => (
-            <ActivityRow />
-          ))}
-        </tbody>
+        {activities.length != 0 && (
+          <tbody>
+            {activities.map((activity) => (
+              <ActivityRow
+                key={activity.moduleID}
+                activity={activity}
+                isOverview={isOverview}
+              />
+            ))}
+          </tbody>
+        )}
       </table>
+      {activities.length == 0 && (
+        <div className="w-full pt-6 flex justify-center">
+          <img
+            src="/empty-inbox.svg"
+            alt="empty"
+            className={isOverview ? 'h-48' : 'h-60'}
+          />
+        </div>
+      )}
     </div>
-  );
+  )
 }

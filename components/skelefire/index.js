@@ -1,65 +1,67 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from 'react'
 
-import { GiFire } from "react-icons/gi";
-import ActivityTable from "./activityTable";
-import { getActiveCourses, getSkelefire } from "@api/skelefire";
-import { SkelefireContext } from "@context/SkelefireContext";
+import ActionButtons from './ActionButtons'
+import ActivityTable from './ActivityTable'
+import CoursesLinks from './CourseLinks'
+import CourseTabs from './CourseTabs'
+
+import { getUnreadActivities, getActiveCourses } from '@api/skelefire'
+import { SkelefireContext } from '@context/SkelefireContext'
 
 export default function Index() {
-  const { skelefire, setCourses, setActivities } = useContext(SkelefireContext);
+  const [isLoading, setLoading] = useState(true)
+  const [activeTab, setActiveTab] = useState('All')
+  const [filteredActivities, setFilteredActivities] = useState([])
+
+  const { skelefire, setCourses, setActivities, countUnreadActivities } =
+    useContext(SkelefireContext)
 
   useEffect(() => {
-    getActiveCourses().then((courses) => setCourses(courses));
+    if (skelefire.courses.length > 0) {
+      getActiveCourses().then((res) => {
+        setCourses(res.data)
+        getUnreadActivities().then((res) => {
+          setActivities(res.data)
+          setFilteredActivities(res.data)
+          countUnreadActivities()
+          setLoading(false)
+        })
+      })
+    }
   }, [])
 
-  const refreshSkelefire = () => {
-    getSkelefire();
-  };
+  useEffect(() => {
+    onTabChange(activeTab)
+    countUnreadActivities()
+  }, [skelefire.activities])
 
-  return (
+  const onTabChange = (courseName) => {
+    const activeCourseID =
+      skelefire.courses.find((c) => c.shortname === courseName)?.courseID || 0
+    setActiveTab(courseName)
+    setFilteredActivities(
+      skelefire.activities.filter((activities) =>
+        activeCourseID ? activities.course === activeCourseID : true
+      )
+    )
+  }
+
+  var coursesTabs = [{ shortname: 'All' }, ...skelefire.courses]
+
+  return isLoading ? (
+    <div className="w-full h-full flex items-center justify-center">
+      <img src="/kokoa-logo.png" alt="loader" className="animate-pulse" />
+    </div>
+  ) : (
     <div className="w-full flex flex-col space-y-4 h-full">
-      <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-6 md:grid-rows-none gap-4">
-        {skelefire.courses.map((a) => (
-          <a className="btn bg-accent text-accent-content rounded-box">{a}</a>
-        ))}
-      </div>
+      <CoursesLinks />
       <div className="flex-1 card bg-base-100 shadow-lg w-full">
         <div className="card-body flex flex-col gap-3">
-          <div className="card-title flex justify-between">
-            <div className="flex items-center">
-              <GiFire className="w-6 h-6 mr-2" /> Skelefire{" "}
-            </div>
-            <div>
-              <div className="dropdown dropdown-end dropdown-hover">
-                <div tabIndex="0" className="m-1 btn btn-sm btn-ghost">
-                  Actions
-                </div>
-                <ul className="shadow menu dropdown-content bg-primary text-primary-content rounded-box w-52 text-base">
-                  <li>
-                    <a>Mark selected as read</a>
-                  </li>
-                  <li>
-                    <a>Mark all as read</a>
-                  </li>
-                </ul>
-              </div>
-
-              <button onClick={refreshSkelefire} className="btn btn-sm btn-ghost">
-                refresh
-              </button>
-            </div>
-          </div>
-          <div className="tabs">
-            {skelefire.courses.map((a, i) => (
-              <a className={`indicator tab tab-lifted ${i === 0 && "tab-active"}`}>
-                {a} <div className="indicator-item badge">8</div>
-              </a>
-            ))}
-            <div className="flex-1 tab tab-lifted cursor-default"></div>
-          </div>
-          <ActivityTable />
+          <ActionButtons />
+          <CourseTabs {...{ coursesTabs, activeTab, onTabChange }} />
+          <ActivityTable activities={filteredActivities} />
         </div>
       </div>
     </div>
-  );
+  )
 }

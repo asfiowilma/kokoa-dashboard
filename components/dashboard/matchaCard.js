@@ -15,7 +15,7 @@ export default function matchaCard({ matkul }) {
           <table className="table table-compact w-full text-center">
             <tbody>
               {matkul.map((a, i) => (
-                <tr>
+                <tr key={i}>
                   <td>{a}</td>
                   <td>
                     {i === 2 ? (

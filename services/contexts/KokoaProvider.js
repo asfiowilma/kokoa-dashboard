@@ -1,6 +1,6 @@
-import React from "react";
-import { SkelefireProvider } from "./SkelefireContext";
+import React from 'react'
+import { SkelefireProvider } from './SkelefireContext'
 
 export default function KokoaProvider({ children }) {
-  return <SkelefireProvider>{children}</SkelefireProvider>;
+    return <SkelefireProvider>{children}</SkelefireProvider>
 }

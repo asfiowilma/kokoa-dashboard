@@ -1,27 +1,63 @@
-import React from "react";
-import { VscMailRead } from "react-icons/vsc";
+import React, { useContext } from 'react'
 
-export default function activityRow() {
+import moment from 'moment'
+import { VscMailRead } from 'react-icons/vsc'
+import { SkelefireContext } from '@context/SkelefireContext'
+
+export default function activityRow({ activity, isOverview }) {
+  const { skelefire, markAsRead, setActivities } = useContext(SkelefireContext)
+
+  const getCourseNameFromCourseId = (courseID) => {
+    const course = skelefire.courses.find((c) => c.courseID === courseID)
+    return course?.shortname
+  }
+
+  const selectActivity = () => {
+    setActivities(
+      skelefire.activities.map((a) =>
+        a.moduleID == activity.moduleID ? { ...a, selected: !a.selected } : a
+      )
+    )
+  }
+
+  const markThisAsRead = (moduleID) => markAsRead([moduleID])
+
   return (
     <tr>
       <td>
-        <input type="checkbox" className="checkbox checkbox-sm" />
+        <input
+          type="checkbox"
+          checked={activity.selected}
+          onClick={selectActivity}
+          readOnly
+          className="checkbox checkbox-sm"
+        />
       </td>
       <td>
-        <div className="badge badge-accent">DAA</div>
+        <a
+          href={`https://scele.cs.ui.ac.id/course/view.php?id=${activity.course}`}
+          target="_blank"
+          className="badge badge-accent"
+        >
+          {getCourseNameFromCourseId(activity.course)}
+        </a>
       </td>
-      <td className="max-w-prose truncate text-left">
-        Lollipop caramels icing jelly sesame snaps liquorice gummies jelly-o candy canes. Ice cream
-        toffee sweet cupcake bonbon bear claw dragée sesame snaps pudding. Bear claw jelly beans
-        marzipan cotton candy cookie chupa chups pie soufflé. Wafer jelly beans toffee gummi bears
-        macaroon toffee.
+      <td
+        className={`${
+          isOverview ? 'max-w-snippet' : 'max-w-prose'
+        } truncate text-left`}
+      >
+        {activity.content}
       </td>
-      <td>1 day ago</td>
+      <td>{moment(activity.lastUpdated).fromNow()}</td>
       <td>
-        <button className="btn btn-sm btn-ghost">
+        <button
+          onClick={() => markThisAsRead(activity.moduleID)}
+          className="btn btn-sm btn-ghost"
+        >
           <VscMailRead />
         </button>
       </td>
     </tr>
-  );
+  )
 }

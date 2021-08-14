@@ -1,15 +1,19 @@
-import React from "react";
-import Head from "next/head";
+import React from 'react'
+import Head from 'next/head'
 
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Navbar from './Navbar'
+import Sidebar from './Sidebar'
+import toast, { Toaster } from 'react-hot-toast'
 
 export default function Layout({ children, labelName }) {
   return (
     <div>
       <Head>
-        <title>Kokoa</title>}
-        <link rel="icon" href={process.env.BACKEND_URL + '/kokoa-favicon.png'} />
+        <title>Kokoa</title>
+        <link
+          rel="icon"
+          href={process.env.BACKEND_URL + '/kokoa-favicon.png'}
+        />
       </Head>
 
       <div className="flex flex-col items-center w-full min-h-screen h-screen bg-neutral">
@@ -24,8 +28,23 @@ export default function Layout({ children, labelName }) {
             <Sidebar />
           </div>
         </div>
-        <footer className="flex items-center justify-center w-full h-8 ">© Caramel Lyth</footer>
+        <Toaster
+          position="bottom-right"
+          toastOptions={{
+            success: {
+              className: 'alert alert-success',
+            },
+            error: {
+              style: {
+                background: 'red',
+              },
+            },
+          }}
+        />
+        <footer className="flex items-center justify-center w-full h-8 ">
+          © Caramel Lyth
+        </footer>
       </div>
     </div>
-  );
+  )
 }

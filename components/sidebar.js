@@ -1,10 +1,13 @@
-import React from "react";
-import { NavLink } from "./NavLink";
-import { AiFillHome, AiFillSetting } from "react-icons/ai";
-import { GiFire, GiCakeSlice, GiStrawberry } from "react-icons/gi";
-import { SiGitea } from "react-icons/si";
+import React, { useContext } from 'react'
+import { NavLink } from './NavLink'
+import { AiFillHome, AiFillSetting } from 'react-icons/ai'
+import { GiFire, GiCakeSlice, GiStrawberry } from 'react-icons/gi'
+import { SiGitea } from 'react-icons/si'
+import { SkelefireContext } from '@context/SkelefireContext'
 
-export default function sidebar() {
+export default function Sidebar() {
+  const { skelefire } = useContext(SkelefireContext)
+
   return (
     <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 rounded-box shadow-lg">
       <li>
@@ -22,7 +25,14 @@ export default function sidebar() {
       </li>
       <li>
         <NavLink href="/skelefire" exact>
-          <GiFire className="w-6 h-6 mr-2" /> Skelefire
+          <div className="flex items-center">
+            <GiFire className="w-6 h-6 mr-2" /> Skelefire
+          </div>
+          {skelefire.activities.length > 0 && (
+            <div className="ml-auto badge border-none badge-accent bg-neutral-content">
+              {skelefire.activities.length}
+            </div>
+          )}
         </NavLink>
       </li>
       <li>
@@ -45,5 +55,5 @@ export default function sidebar() {
         </NavLink>
       </li>
     </ul>
-  );
+  )
 }
