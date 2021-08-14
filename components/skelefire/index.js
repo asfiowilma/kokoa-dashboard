@@ -17,7 +17,8 @@ export default function Index() {
     useContext(SkelefireContext)
 
   useEffect(() => {
-    if (skelefire.courses.length > 0) {
+    if (skelefire.courses.length == 0) {
+      console.log('useeffects')
       getActiveCourses().then((res) => {
         setCourses(res.data)
         getUnreadActivities().then((res) => {
@@ -27,6 +28,8 @@ export default function Index() {
           setLoading(false)
         })
       })
+    } else {
+      setLoading(false)
     }
   }, [])
 

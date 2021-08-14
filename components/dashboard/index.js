@@ -21,7 +21,8 @@ export default function dashboard() {
   ]
 
   useEffect(() => {
-    if (skelefire.courses.length > 0) {
+    if (skelefire.courses.length == 0) {
+      console.log('dashboard useeffects')
       getActiveCourses().then((res) => setCourses(res.data))
       getUnreadActivities().then((res) => setActivities(res.data))
     }
