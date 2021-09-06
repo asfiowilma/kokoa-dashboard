@@ -15,21 +15,19 @@ const SkelefireBot = () => {
     return () => clearInterval(interval)
   })
 
-  const scrape = () => {
-    getSkeleFire().then(() => {
-      getUnreadActivities().then((res) => {
-        setActivities(res.data)
-        if (res.data.length > 0)
-          Push.create('Skelefire', {
-            body: 'New updates found!',
-            icon: '/kokoa-skelefire.png',
-            onClick: function () {
-              window.focus()
-              this.close()
-            },
-          })
+  const scrape = async () => {
+    await getSkeleFire()
+    let res = await getUnreadActivities()
+    setActivities(res.data)
+    if (res.data.length > 0)
+      Push.create('Skelefire', {
+        body: 'New updates found!',
+        icon: process.env.BACKEND_URL + '/kokoa-skelefire.png',
+        onClick: function () {
+          window.focus()
+          this.close()
+        },
       })
-    })
   }
 
   return <div className="hidden" />

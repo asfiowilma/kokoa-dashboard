@@ -18,7 +18,11 @@ export default function ActivityTable({ activities, isOverview }) {
   }
 
   return (
-    <div className="overflow-auto max-h-80 scrollbar scrollbar-hidden hover:scrollbar-width-1 hover:scrollbar-track-transparent hover:scrollbar-thumb-yellow-600 hover:scrollbar-track-radius-full pr-1.5">
+    <div
+      className={`${
+        isOverview ? 'max-h-56' : 'max-h-80'
+      } overflow-auto scrollbar scrollbar-hidden hover:scrollbar-width-1 hover:scrollbar-track-transparent hover:scrollbar-thumb-yellow-600 hover:scrollbar-track-radius-full pr-1.5`}
+    >
       <table className="table table-compact w-full text-center relative">
         <thead className="sticky top-0 z-20">
           <tr>
@@ -52,7 +56,7 @@ export default function ActivityTable({ activities, isOverview }) {
       {activities.length == 0 && (
         <div className="w-full pt-6 flex justify-center">
           <img
-            src="/empty-inbox.svg"
+            src={process.env.BACKEND_URL + '/empty-inbox.svg'}
             alt="empty"
             className={isOverview ? 'h-48' : 'h-60'}
           />

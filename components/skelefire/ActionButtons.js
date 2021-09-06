@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { getSkeleFire, getUnreadActivities } from '@api/skelefire'
 import { SkelefireContext } from '@context/SkelefireContext'
 import { GiFire } from 'react-icons/gi'
+import Push from 'push.js'
 
 export default function ActionButtons() {
   const [isFetching, setFetching] = useState(false)
@@ -9,15 +10,22 @@ export default function ActionButtons() {
   const { skelefire, setActivities, countUnreadActivities, markAsRead } =
     useContext(SkelefireContext)
 
-  function refreshSkelefire() {
+  async function refreshSkelefire() {
     setFetching(true)
-    getSkeleFire().then(() => {
-      getUnreadActivities().then((res) => {
-        setActivities(res.data)
-        countUnreadActivities()
-        setFetching(false)
+    await getSkeleFire()
+    var unreadActivities = await getUnreadActivities()
+    setActivities(unreadActivities.data)
+    countUnreadActivities()
+    setFetching(false)
+    if (unreadActivities.data.length > 0)
+      Push.create('Skelefire', {
+        body: 'New updates found!',
+        icon: process.env.BACKEND_URL + '/kokoa-skelefire.png',
+        onClick: function () {
+          window.focus()
+          this.close()
+        },
       })
-    })
   }
 
   function markSelectedAsRead() {

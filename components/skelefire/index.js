@@ -53,7 +53,11 @@ export default function Index() {
 
   return isLoading ? (
     <div className="w-full h-full flex items-center justify-center">
-      <img src="/kokoa-logo.png" alt="loader" className="animate-pulse" />
+      <img
+        src={process.env.BACKEND_URL + '/kokoa-logo.png'}
+        alt="loader"
+        className="animate-pulse"
+      />
     </div>
   ) : (
     <div className="w-full flex flex-col space-y-4 h-full">

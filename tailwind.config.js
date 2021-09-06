@@ -7,6 +7,9 @@ module.exports = {
       maxWidth: {
         snippet: '40ch',
       },
+      maxHeight: {
+        63: '15.75rem',
+      },
       flex: {
         2: '2 2 0%',
       },

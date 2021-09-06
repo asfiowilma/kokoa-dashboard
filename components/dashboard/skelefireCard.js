@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import ActionButtons from '@components/skelefire/ActionButtons'
 import ActivityTable from '@components/skelefire/ActivityTable'
 import CourseTabs from '@components/skelefire/CourseTabs'
+import CourseLinks from '@components/skelefire/CourseLinks'
 import { SkelefireContext } from '@context/SkelefireContext'
 
 export default function skelefireCard() {
@@ -35,11 +36,14 @@ export default function skelefireCard() {
   var coursesTabs = [{ shortname: 'All' }, ...skelefire.courses]
 
   return (
-    <div className="card bg-base-100 shadow-lg md:col-span-2 row-span-2">
-      <div className="card-body flex flex-col gap-3">
-        <ActionButtons />
-        <CourseTabs {...{ coursesTabs, activeTab, onTabChange }} />
-        <ActivityTable activities={filteredActivities} isOverview />
+    <div className="md:col-span-2 row-span-2 flex flex-col gap-4">
+      <CourseLinks />
+      <div className="flex-1 card bg-base-100 shadow-lg md:col-span-2 row-span-2">
+        <div className="card-body flex flex-col gap-3">
+          <ActionButtons />
+          <CourseTabs {...{ coursesTabs, activeTab, onTabChange }} />
+          <ActivityTable activities={filteredActivities} isOverview />
+        </div>
       </div>
     </div>
   )

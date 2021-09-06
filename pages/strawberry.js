@@ -1,9 +1,10 @@
-import Layout from "../components/layout";
+import Layout from '@components/layout'
+import Strawberry from '@components/strawberry'
 
-export default function Strawberry() {
+export default function StrawberryPage() {
   return (
     <Layout labelName="sidebar">
-      this is Siasisten
+      <Strawberry />
     </Layout>
-  );
+  )
 }
