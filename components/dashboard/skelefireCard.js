@@ -36,7 +36,7 @@ export default function skelefireCard() {
   var coursesTabs = [{ shortname: 'All' }, ...skelefire.courses]
 
   return (
-    <div className="md:col-span-2 row-span-2 flex flex-col gap-4">
+    <div className="md:col-span-2 flex flex-col gap-4">
       <CourseLinks />
       <div className="flex-1 card bg-base-100 shadow-lg md:col-span-2 row-span-2">
         <div className="card-body flex flex-col gap-3">

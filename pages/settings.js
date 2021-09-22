@@ -1,9 +1,10 @@
-import Layout from "../components/layout";
+import Layout from '@components/layout'
+import Settings from '@components/settings'
 
-export default function Settings() {
+export default function SettingsPage() {
   return (
     <Layout labelName="sidebar">
-      this is settings
+      <Settings />
     </Layout>
-  );
+  )
 }

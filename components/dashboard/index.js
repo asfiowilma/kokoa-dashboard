@@ -29,10 +29,12 @@ export default function dashboard() {
   }, [])
 
   return (
-    <div className="w-full grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 grid-rows-3">
-      <SettingsCard />
+    <div className="w-full grid grid-flow-row-dense grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="flex flex-col gap-4">
+        <SettingsCard />
+        <StrawberryCard />
+      </div>
       <SkelefireCard />
-      <StrawberryCard />
       <MatchaCard {...{ matkul }} />
       <TiramisuCard />
     </div>
