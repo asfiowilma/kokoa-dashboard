@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 
 import moment from 'moment'
 import { VscMailRead } from 'react-icons/vsc'
-import { SkelefireContext } from '@context/SkelefireContext'
+import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 
 export default function activityRow({ activity, isOverview }) {
   const { skelefire, markAsRead, setActivities } = useContext(SkelefireContext)

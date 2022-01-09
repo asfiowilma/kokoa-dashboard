@@ -1,43 +1,88 @@
-import React, { useContext, useState } from 'react'
+import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
+import React, { useEffect, useState } from 'react'
 import { FaUser, FaUsers, FaUserCheck } from 'react-icons/fa'
 
 import OfferRow from './OfferRow'
 
-export default function OfferTable({ activities }) {
-  const offers = ['melamar', 'direkomendasikan', 'diterima', 'melamar']
+export default function OfferTable() {
+  const {
+    strawberry: { listings },
+    dispatch,
+  } = useStrawberry()
+
+  const [search, setSearch] = useState('')
+  const [filteredListings, setFilteredListing] = useState(listings)
+
+  useEffect(() => {
+    if (search !== '')
+      setFilteredListing(
+        listings.filter((listing) =>
+          listing.title.toLowerCase().includes(search)
+        )
+      )
+    else setFilteredListing(listings)
+  }, [search, listings])
 
   return (
-    <div className="overflow-y-auto max-h-60 scrollbar scrollbar-hidden hover:scrollbar-width-1 hover:scrollbar-track-transparent hover:scrollbar-thumb-yellow-600 hover:scrollbar-track-radius-full pr-1.5">
-      <table className="table table-compact w-full text-center relative">
+    <div>
+      <div className="form-control mb-2 flex">
+        <input
+          type="text"
+          placeholder="🔍 Search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full input input-primary input-bordered input-sm"
+        />
+      </div>
+      <table className="table w-full text-center relative">
         <thead className="sticky top-0 z-20">
           <tr>
-            <th>Course</th>
-            <th className="text-info">
+            <th
+              className="cursor-pointer hover:text-amber-300"
+              onClick={() => dispatch({ type: 'sort_by_course_name' })}
+            >
+              Course
+            </th>
+            <th
+              onClick={() => dispatch({ type: 'sort_by_needed' })}
+              className="text-info cursor-pointer hover:text-amber-300"
+            >
               <FaUser className="w-4 h-4 mx-auto" />
             </th>
-            <th className="text-primary">
+            <th
+              onClick={() => dispatch({ type: 'sort_by_applied' })}
+              className="text-primary cursor-pointer hover:text-amber-300"
+            >
               <FaUsers className="w-4 h-4 mx-auto" />
             </th>
-            <th className="text-success">
+            <th
+              onClick={() => dispatch({ type: 'sort_by_accepted' })}
+              className="text-success cursor-pointer hover:text-amber-300"
+            >
               <FaUserCheck className="w-4 h-4 mx-auto" />
             </th>
-            <th>Status</th>
+            <th
+              onClick={() => dispatch({ type: 'sort_by_status' })}
+              className="cursor-pointer hover:text-amber-300"
+            >
+              Status
+            </th>
           </tr>
         </thead>
-        {offers.length != 0 && (
+        {filteredListings.length != 0 && (
           <tbody>
-            {offers.map((offer, _) => (
-              <OfferRow key={_} offer={offer} />
+            {filteredListings.map((listing) => (
+              <OfferRow key={listing.url} listing={listing} />
             ))}
           </tbody>
         )}
       </table>
-      {offers.length == 0 && (
+      {filteredListings.length == 0 && (
         <div className="w-full pt-6 flex justify-center">
           <img
             src={process.env.BACKEND_URL + '/empty-inbox.svg'}
             alt="empty"
-            className={isOverview ? 'h-48' : 'h-60'}
+            className="h-60"
           />
         </div>
       )}

@@ -6,7 +6,7 @@ import CoursesLinks from './CourseLinks'
 import CourseTabs from './CourseTabs'
 
 import { getUnreadActivities, getActiveCourses } from '@api/skelefire'
-import { SkelefireContext } from '@context/SkelefireContext'
+import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 
 export default function Index() {
   const [isLoading, setLoading] = useState(true)

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { SkelefireContext } from '@context/SkelefireContext'
+import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 
 import ActivityRow from './activityRow'
 

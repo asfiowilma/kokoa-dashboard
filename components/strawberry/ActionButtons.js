@@ -1,48 +1,41 @@
+import { fetchAllListings, scrapeListings } from '@api/strawberry'
+import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 import React, { useContext, useState } from 'react'
-import { SkelefireContext } from '@context/SkelefireContext'
 import { GiBinoculars } from 'react-icons/gi'
 import { HiOutlineFilter } from 'react-icons/hi'
 
 export default function ActionButtons() {
   const [isFetching, setFetching] = useState(false)
+  const [isLoading, setLoading] = useState(false)
 
-  const { skelefire, setActivities, countUnreadActivities, markAsRead } =
-    useContext(SkelefireContext)
+  const { dispatch } = useStrawberry()
 
-  function refreshSkelefire() {
-    // setFetching(true)
-    // getSkeleFire().then(() => {
-    //   getUnreadActivities().then((res) => {
-    //     setActivities(res.data)
-    //     countUnreadActivities()
-    //     setFetching(false)
-    //   })
-    // })
-  }
-
-  function markAllAsRead() {
-    // const moduleIDs = skelefire.activities.map((activity) => activity.moduleID)
-    // markAsRead(moduleIDs)
+  function refreshListings() {
+    setFetching(true)
+    scrapeListings().then(() => {
+      fetchAllListings().then((result) => {
+        console.log(result)
+        dispatch({ type: 'set_listings', payload: result.data })
+        setFetching(false)
+      })
+    })
   }
 
   return (
     <div className="card-title flex justify-between">
       <div className="flex items-center">
-        <GiBinoculars className="w-6 h-6 mr-2" /> Job Offers
+        <GiBinoculars className="w-6 h-6 mr-2" /> Job Listings
+        <a
+          href="https://siasisten.cs.ui.ac.id/lowongan/listLowongan/"
+          target="_blank"
+          className={`btn btn-sm ml-2 btn-secondary`}
+        >
+          Live Page
+        </a>
       </div>
       <div>
-        <button className="btn btn-sm btn-ghost ">
-          <HiOutlineFilter className="h-3 w-3 mr-2" /> Watching
-        </button>
         <button
-          onClick={markAllAsRead}
-          className={`btn btn-sm btn-ghost ${isFetching && 'loading'}`}
-        >
-          {isFetching ? 'loading' : 'read all'}
-        </button>
-
-        <button
-          onClick={refreshSkelefire}
+          onClick={refreshListings}
           className={`btn btn-sm btn-ghost ${isFetching && 'loading'}`}
         >
           {isFetching ? 'loading' : 'refresh'}

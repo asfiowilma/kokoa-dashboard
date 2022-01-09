@@ -19,7 +19,7 @@ export default function QuicklogCard() {
             href={`https://scele.cs.ui.ac.id/course/view.php?id=${sceleID}`}
             target="_blank"
           >
-            <div class="badge badge-accent">{courseName}</div>
+            <div className="badge badge-accent">{courseName}</div>
           </a>
         </div>
         <QuicklogForm />

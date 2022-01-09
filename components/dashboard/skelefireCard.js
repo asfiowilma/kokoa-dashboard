@@ -4,7 +4,7 @@ import ActionButtons from '@components/skelefire/ActionButtons'
 import ActivityTable from '@components/skelefire/ActivityTable'
 import CourseTabs from '@components/skelefire/CourseTabs'
 import CourseLinks from '@components/skelefire/CourseLinks'
-import { SkelefireContext } from '@context/SkelefireContext'
+import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 
 export default function skelefireCard() {
   const [activeTab, setActiveTab] = useState('All')

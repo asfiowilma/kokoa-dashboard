@@ -1,4 +1,4 @@
-import { SkelefireContext } from '@context/SkelefireContext'
+import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 import React, { useContext } from 'react'
 import SkelefireBot from 'services/bots/skelefire'
 

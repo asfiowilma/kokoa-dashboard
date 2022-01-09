@@ -2,17 +2,17 @@ import React, { useContext } from 'react'
 
 import StatusBadge from './StatusBadge'
 
-export default function OfferRow({ offer }) {
+export default function OfferRow({ listing }) {
   return (
     <tr>
-      <td className="max-w-snippet whitespace-normal">
-        Pemrograman Berbasis Platform S1 Reguler
-      </td>
-      <td className="text-info">27</td>
-      <td className="text-primary">69</td>
-      <td className="text-success">27</td>
+      <td className="whitespace-normal text-left">{listing.title}</td>
+      <td className="text-info">{listing.needed}</td>
+      <td className="text-primary">{listing.applied}</td>
+      <td className="text-success">{listing.accepted}</td>
       <td>
-        <StatusBadge status={offer} />
+        {listing.status !== '-------' && (
+          <StatusBadge status={listing.status} />
+        )}
       </td>
     </tr>
   )

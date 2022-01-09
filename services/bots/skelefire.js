@@ -1,5 +1,5 @@
 import { getSkeleFire, getUnreadActivities } from '@api/skelefire'
-import { SkelefireContext } from '@context/SkelefireContext'
+import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 import React, { useContext, useEffect } from 'react'
 import Push from 'push.js'
 

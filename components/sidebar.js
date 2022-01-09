@@ -3,13 +3,13 @@ import { NavLink } from './NavLink'
 import { AiFillHome, AiFillSetting } from 'react-icons/ai'
 import { GiFire, GiCakeSlice, GiStrawberry } from 'react-icons/gi'
 import { SiGitea } from 'react-icons/si'
-import { SkelefireContext } from '@context/SkelefireContext'
+import { useSkelefire } from '@context/SkelefireContext/useSkelefire'
 
 export default function Sidebar() {
-  const { skelefire } = useContext(SkelefireContext)
+  const { skelefire } = useSkelefire()
 
   return (
-    <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 rounded-box shadow-lg">
+    <ul className="menu p-4 overflow-y-auto w-72 bg-base-100 rounded-box shadow-lg">
       <li>
         <NavLink href="/" exact>
           <AiFillHome className="w-6 h-6 mr-2" /> Dashboard

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { SkelefireContext } from '@context/SkelefireContext'
+import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 
 export default function CourseLinks() {
   const { skelefire } = useContext(SkelefireContext)

@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react'
 import { getSkeleFire, getUnreadActivities } from '@api/skelefire'
-import { SkelefireContext } from '@context/SkelefireContext'
 import { GiFire } from 'react-icons/gi'
 import Push from 'push.js'
+import { useSkelefire } from '@context/SkelefireContext/useSkelefire'
 
 export default function ActionButtons() {
   const [isFetching, setFetching] = useState(false)
 
   const { skelefire, setActivities, countUnreadActivities, markAsRead } =
-    useContext(SkelefireContext)
+    useSkelefire()
 
   async function refreshSkelefire() {
     setFetching(true)
