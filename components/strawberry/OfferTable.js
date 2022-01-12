@@ -34,36 +34,37 @@ export default function OfferTable() {
           className="w-full input input-primary input-bordered input-sm"
         />
       </div>
-      <table className="table w-full text-center relative">
+      <table className="table table-fixed w-full text-center relative">
         <thead className="sticky top-0 z-20">
           <tr>
             <th
-              className="cursor-pointer hover:text-amber-300"
+              className="w-5/12 cursor-pointer hover:text-amber-300"
               onClick={() => dispatch({ type: 'sort_by_course_name' })}
             >
               Course
             </th>
+            <th className="w-3/12">Lecturer</th>
             <th
               onClick={() => dispatch({ type: 'sort_by_needed' })}
-              className="text-info cursor-pointer hover:text-amber-300"
+              className="w-1/12 text-info cursor-pointer hover:text-amber-300"
             >
               <FaUser className="w-4 h-4 mx-auto" />
             </th>
             <th
               onClick={() => dispatch({ type: 'sort_by_applied' })}
-              className="text-primary cursor-pointer hover:text-amber-300"
+              className="w-1/12 text-primary cursor-pointer hover:text-amber-300"
             >
               <FaUsers className="w-4 h-4 mx-auto" />
             </th>
             <th
               onClick={() => dispatch({ type: 'sort_by_accepted' })}
-              className="text-success cursor-pointer hover:text-amber-300"
+              className="w-1/12 text-success cursor-pointer hover:text-amber-300"
             >
               <FaUserCheck className="w-4 h-4 mx-auto" />
             </th>
             <th
               onClick={() => dispatch({ type: 'sort_by_status' })}
-              className="cursor-pointer hover:text-amber-300"
+              className="w-1/12 cursor-pointer hover:text-amber-300"
             >
               Status
             </th>

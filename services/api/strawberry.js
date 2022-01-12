@@ -48,3 +48,7 @@ export function scrapeListings() {
 export function scrapeOlderLogs() {
   return axios.get(`${API_URL}/strawberry/get-old-logs`)
 }
+
+export function setPayday(id, payload) {
+  return axios.patch(`${API_URL}/strawberry/report/${id}/`, payload)
+}

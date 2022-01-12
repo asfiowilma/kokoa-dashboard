@@ -3,6 +3,18 @@ import { toast } from 'react-hot-toast'
 
 export default function StrawberryReducer(state, action) {
   switch (action.type) {
+    case 'set_reports':
+      return { ...state, reports: action.payload }
+    case 'set_payday':
+      const { id, date } = action.payload
+      const reportUpdated = [...state.reports]
+      const paid = reportUpdated.findIndex((x) => x.report_id === id)
+      reportUpdated[paid] = {
+        ...reportUpdated[paid],
+        is_paid: true,
+        paid_on: date,
+      }
+      return { ...state, reports: reportUpdated }
     case 'set_listings':
       toast.success('TA Listings updated!')
       return { ...state, listings: action.payload }

@@ -57,7 +57,7 @@ export default function QuicklogForm() {
       <select
         onChange={(e) => setCategory(e.target.value)}
         value={category}
-        className="select bg-stone-800 select-sm w-full max-w-xs"
+        className="select bg-stone-800 select-sm w-full"
       >
         <option disabled="disabled" value={0}>
           Category
