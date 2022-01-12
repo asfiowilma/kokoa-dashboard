@@ -44,8 +44,8 @@ export default function index() {
       totalEarning: workingMonths.reduce((x, y) => x + y.earnings - 2900, 0),
       totalEarningPaid: paidMonths.reduce((x, y) => x + y.earnings - 2900, 0),
       totalWorkHours: reports.reduce((x, y) => x + y.work_hours, 0),
-      workingMonths: workingMonths.length,
-      paidMonths: paidMonths.length,
+      workingMonths: workingMonths.length || 1,
+      paidMonths: paidMonths.length || 1,
     }
     return stats
   }
