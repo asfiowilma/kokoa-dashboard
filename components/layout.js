@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Head from 'next/head'
 
 import Navbar from './Navbar'
 import Sidebar from './Sidebar'
 import toast, { Toaster } from 'react-hot-toast'
 
-export default function Layout({ children, labelName }) {
+export default function Layout({ children }) {
   return (
     <div>
       <Head>
@@ -17,15 +17,15 @@ export default function Layout({ children, labelName }) {
       </Head>
 
       <div className="flex flex-col items-center w-full min-h-screen h-screen bg-neutral">
-        <div className="w-full flex-1 drawer drawer-mobile px-4 md:px-8 pt-4 md:pt-8">
-          <input id={labelName} type="checkbox" className="drawer-toggle" />
-          <div className="drawer-content flex flex-col items-center pl-0 md:pl-6 scrollbar scrollbar-hidden">
-            <Navbar sidebarLabel={labelName} />
-            <main className="flex w-full flex-1 items-start">{children}</main>
-          </div>
-          <div className="drawer-side">
-            <label htmlFor={labelName} className="drawer-overlay"></label>
+        <div className="w-full flex-1 flex px-4 md:px-8 pt-4 md:pt-8">
+          <aside className="relative">
             <Sidebar />
+          </aside>
+          <div
+            className="flex-1 flex flex-col items-center pl-0 md:pl-6 overflow-auto scrollbar scrollbar-hidden"
+            style={{ maxHeight: 'calc(100vh - 4rem)' }}
+          >
+            <main className="flex w-full flex-1 items-start">{children}</main>
           </div>
         </div>
         <Toaster

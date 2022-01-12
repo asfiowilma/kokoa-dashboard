@@ -3,7 +3,7 @@ import Settings from '@components/settings'
 
 export default function SettingsPage() {
   return (
-    <Layout labelName="sidebar">
+    <Layout>
       <Settings />
     </Layout>
   )

@@ -1,9 +1,5 @@
-import Layout from "../components/layout";
+import Layout from '../components/layout'
 
-export default function Tiramisu () {
-  return (
-    <Layout labelName="sidebar">
-      this is Tiramisu 
-    </Layout>
-  );
+export default function Tiramisu() {
+  return <Layout>this is Tiramisu</Layout>
 }

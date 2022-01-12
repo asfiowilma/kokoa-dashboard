@@ -3,7 +3,7 @@ import Strawberry from '@components/strawberry'
 
 export default function StrawberryPage() {
   return (
-    <Layout labelName="sidebar">
+    <Layout>
       <Strawberry />
     </Layout>
   )

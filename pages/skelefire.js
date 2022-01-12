@@ -3,7 +3,7 @@ import Skelefire from '../components/skelefire'
 
 export default function SkelefirePage() {
   return (
-    <Layout labelName="sidebar">
+    <Layout>
       <Skelefire />
     </Layout>
   )
