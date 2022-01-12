@@ -4,12 +4,16 @@ import { AiFillHome, AiFillSetting } from 'react-icons/ai'
 import { GiFire, GiCakeSlice, GiStrawberry } from 'react-icons/gi'
 import { SiGitea } from 'react-icons/si'
 import { useSkelefire } from '@context/SkelefireContext/useSkelefire'
+import { useSidebar } from '@context/SidebarContext'
 import { CgChevronDoubleLeftO, CgChevronDoubleRightO } from 'react-icons/cg'
 
 export default function Sidebar() {
-  const [isExpanded, setExpanded] = useState(false)
+  const { sidebar, dispatch } = useSidebar()
 
-  return isExpanded ? (
+  const setExpanded = (isExpanded) =>
+    dispatch({ type: 'set_expanded', payload: isExpanded })
+
+  return sidebar.isExpanded ? (
     <SidebarExpanded {...{ setExpanded }} />
   ) : (
     <SidebarCollapsed {...{ setExpanded }} />
