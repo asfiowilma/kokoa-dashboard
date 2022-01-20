@@ -1,24 +1,22 @@
-import { fetchAllListings, scrapeListings } from '@api/strawberry'
+import {
+  fetchAllListings,
+  scrapeAndFetch,
+  scrapeListings,
+} from '@api/strawberry'
 import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { GiBinoculars } from 'react-icons/gi'
-import { HiOutlineFilter } from 'react-icons/hi'
 
 export default function ActionButtons() {
   const [isFetching, setFetching] = useState(false)
-  const [isLoading, setLoading] = useState(false)
 
   const { dispatch } = useStrawberry()
 
-  function refreshListings() {
+  const refreshListings = async () => {
     setFetching(true)
-    scrapeListings().then(() => {
-      fetchAllListings().then((result) => {
-        console.log(result)
-        dispatch({ type: 'set_listings', payload: result.data })
-        setFetching(false)
-      })
-    })
+    const listings = await scrapeAndFetch()
+    dispatch({ type: 'set_listings', payload: listings })
+    setFetching(false)
   }
 
   return (

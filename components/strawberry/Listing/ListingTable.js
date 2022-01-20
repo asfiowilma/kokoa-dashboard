@@ -2,7 +2,7 @@ import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 import React, { useEffect, useState } from 'react'
 import { FaUser, FaUsers, FaUserCheck } from 'react-icons/fa'
 
-import OfferRow from './OfferRow'
+import OfferRow from './ListingRow'
 
 export default function OfferTable() {
   const {

@@ -1,21 +1,23 @@
 import {
-  fetchAllListings,
   fetchMonthlyEarnings,
   fetchYearlyEarnings,
+  scrapeAndFetch,
 } from '@api/strawberry'
 import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 import React, { useEffect, useState } from 'react'
 import { CURRENT_MONTH, CURRENT_YEAR } from 'services/constants'
-import { numberToRupiah } from 'services/utils/numberToRupiah'
-import OfferCard from './OfferCard'
-import QuicklogCard from './QuicklogCard'
+import OfferCard from './Listing'
+import { LogsSection } from './Logs'
+import { QuicklogSection } from './Quicklog'
+import QuicklogCard from './Quicklog/QuicklogCard'
 import { ReportCard } from './ReportCard'
-import { FullStats, Stats, ThisMonthStats } from './Stats'
+import { FullStats, ThisMonthStats } from './Stats'
 
 export default function index() {
   const [year, setYear] = useState(CURRENT_YEAR)
   const [isLoading, setLoading] = useState(true)
   const [isFetching, setFetching] = useState(false)
+  const [tab, setTab] = useState(0)
   const [currentMonthData, setCurrentData] = useState({})
   const {
     strawberry: { reports },
@@ -23,11 +25,15 @@ export default function index() {
   } = useStrawberry()
 
   useEffect(async () => {
-    const listing = await fetchAllListings()
-    dispatch({ type: 'set_listings', payload: listing.data })
-    const result = await fetchMonthlyEarnings(CURRENT_MONTH, CURRENT_YEAR)
-    setCurrentData(result.data)
+    const listing = await scrapeAndFetch()
+    dispatch({ type: 'set_listings', payload: listing })
+    const { data: result } = await fetchMonthlyEarnings(
+      CURRENT_MONTH,
+      CURRENT_YEAR
+    )
+    setCurrentData(result)
     setLoading(false)
+    return
   }, [])
 
   useEffect(async () => {
@@ -53,12 +59,9 @@ export default function index() {
   return (
     <div className="grid grid-dense grid-cols-3 grid-rows-1 gap-4 w-full h-full">
       <FullStats stats={calculateStats()} />
-      <div className="flex flex-col gap-4">
-        <QuicklogCard />
-        <ThisMonthStats {...{ currentMonthData, isLoading }} />
-      </div>
+      <QuicklogSection {...{ currentMonthData, isLoading, tab, setTab }} />
       <ReportCard {...{ isFetching, year, setYear }} />
-      <OfferCard isLoading={isLoading} />
+      {tab ? <OfferCard isLoading={isLoading} /> : <LogsSection />}
     </div>
   )
 }

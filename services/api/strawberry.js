@@ -52,3 +52,18 @@ export function scrapeOlderLogs() {
 export function setPayday(id, payload) {
   return axios.patch(`${API_URL}/strawberry/report/${id}/`, payload)
 }
+
+export async function scrapeAndFetch() {
+  var preferred_order = ['diterima', 'direkomendasikan', 'melamar', '-------']
+  await scrapeListings()
+  const { data: listings } = await fetchAllListings()
+  listings
+    .sort((a, b) => (a.state < b.state ? 1 : -1))
+    .sort((a, b) =>
+      preferred_order.indexOf(a.status) > preferred_order.indexOf(b.status)
+        ? 1
+        : -1
+    )
+  console.log(listings)
+  return listings
+}

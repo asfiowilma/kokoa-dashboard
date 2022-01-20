@@ -1,7 +1,7 @@
 import React from 'react'
 
 import ActionButtons from './ActionButtons'
-import OfferTable from './OfferTable'
+import OfferTable from './ListingTable'
 
 export default function OfferCard({ isLoading }) {
   return (

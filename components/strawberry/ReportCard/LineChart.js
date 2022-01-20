@@ -31,7 +31,7 @@ export const LineChart = ({ year, data }) => {
       title: {
         display: true,
         color: 'white',
-        text: `Monhly Earning Report of ${year}`,
+        text: `Monthly Earning Report of ${year}`,
       },
     },
   }
