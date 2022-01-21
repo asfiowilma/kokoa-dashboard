@@ -1,6 +1,6 @@
+import { GiStrawberry } from 'react-icons/gi'
 import QuicklogForm from '@components/strawberry/Quicklog/QuicklogForm'
 import React, { useState, useEffect } from 'react'
-import { GiStrawberry } from 'react-icons/gi'
 
 export default function StrawberryCard() {
   const [isWorking, setIsWorking] = useState()

@@ -1,12 +1,12 @@
+import { getActiveCourses, getUnreadActivities } from '@api/skelefire'
+import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 import React, { useContext, useEffect } from 'react'
 
+import MatchaCard from './matchaCard'
 import SettingsCard from './settingsCard'
 import SkelefireCard from './skelefireCard'
 import StrawberryCard from './strawberryCard'
-import MatchaCard from './matchaCard'
 import TiramisuCard from './tiramisuCard'
-import { getActiveCourses, getUnreadActivities } from '@api/skelefire'
-import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 
 export default function dashboard() {
   const { skelefire, setCourses, setActivities } = useContext(SkelefireContext)

@@ -14,9 +14,11 @@ import { ReportCard } from './ReportCard'
 import { FullStats, ThisMonthStats } from './Stats'
 
 export default function index() {
+  const [isLoadingListings, setLoadingListings] = useState(true)
+  const [isFetchingYearly, setFetchingYearly] = useState(true)
+  const [isFetchingMonthly, setFetchingMonthly] = useState(false)
+
   const [year, setYear] = useState(CURRENT_YEAR)
-  const [isLoading, setLoading] = useState(true)
-  const [isFetching, setFetching] = useState(false)
   const [tab, setTab] = useState(0)
   const [currentMonthData, setCurrentData] = useState({})
   const {
@@ -27,20 +29,24 @@ export default function index() {
   useEffect(async () => {
     const listing = await scrapeAndFetch()
     dispatch({ type: 'set_listings', payload: listing })
+    setLoadingListings(false)
+  }, [])
+
+  useEffect(async () => {
     const { data: result } = await fetchMonthlyEarnings(
       CURRENT_MONTH,
       CURRENT_YEAR
     )
     setCurrentData(result)
-    setLoading(false)
+    setFetchingMonthly(false)
     return
   }, [])
 
   useEffect(async () => {
-    setFetching(true)
+    setFetchingYearly(true)
     const { data: raw } = await fetchYearlyEarnings(year)
     dispatch({ type: 'set_reports', payload: raw.data })
-    setFetching(false)
+    setFetchingYearly(false)
   }, [year])
 
   const calculateStats = () => {
@@ -59,9 +65,11 @@ export default function index() {
   return (
     <div className="grid grid-dense grid-cols-3 grid-rows-1 gap-4 w-full h-full">
       <FullStats stats={calculateStats()} />
-      <QuicklogSection {...{ currentMonthData, isLoading, tab, setTab }} />
-      <ReportCard {...{ isFetching, year, setYear }} />
-      {tab ? <OfferCard isLoading={isLoading} /> : <LogsSection />}
+      <QuicklogSection
+        {...{ currentMonthData, isLoading: isFetchingMonthly, tab, setTab }}
+      />
+      <ReportCard {...{ isFetching: isFetchingYearly, year, setYear }} />
+      {tab ? <OfferCard isLoading={isLoadingListings} /> : <LogsSection />}
     </div>
   )
 }

@@ -48,6 +48,8 @@ export default function StrawberryReducer(state, action) {
           : -1
       )
       return { ...state, listings: sorted_listings }
+    case 'set_logs':
+      return { ...state, logs: action.payload }
     default:
       return state
   }

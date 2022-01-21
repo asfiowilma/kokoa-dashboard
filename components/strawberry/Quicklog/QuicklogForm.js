@@ -2,6 +2,23 @@ import React, { useState } from 'react'
 import { quickAddLog } from '@api/strawberry'
 import toast from 'react-hot-toast'
 
+export const categories = [
+  'Asistensi/Tutorial',
+  'Mengoreksi',
+  'Mengawas',
+  'Persiapan Asistensi',
+  'Membuat soal/tugas',
+  'Rapat',
+  'Sit in Kelas',
+  'Pengembangan Materi',
+  'Pengembangan apps',
+  'Persiapan infra',
+  'Dokumentasi',
+  'Persiapan kuliah',
+  'Penunjang',
+  'Input Data',
+]
+
 export default function QuicklogForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [category, setCategory] = useState(0)
@@ -9,22 +26,6 @@ export default function QuicklogForm() {
   const [date, setDate] = useState(new Date().toISOString().substr(0, 10))
   const [startTime, setStartTime] = useState()
   const [endTime, setEndTime] = useState()
-  const categories = [
-    'Asistensi/Tutorial',
-    'Mengoreksi',
-    'Mengawas',
-    'Persiapan Asistensi',
-    'Membuat soal/tugas',
-    'Rapat',
-    'Sit in Kelas',
-    'Pengembangan Materi',
-    'Pengembangan apps',
-    'Persiapan infra',
-    'Dokumentasi',
-    'Persiapan kuliah',
-    'Penunjang',
-    'Input Data',
-  ]
 
   const submitHandler = async () => {
     var log = {
