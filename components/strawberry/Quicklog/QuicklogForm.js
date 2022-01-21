@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { quickAddLog } from '@api/strawberry'
+import { quickAddLog, scrapeLogs } from '@api/strawberry'
 import toast from 'react-hot-toast'
+import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 
 export const categories = [
   'Asistensi/Tutorial',
@@ -27,6 +28,8 @@ export default function QuicklogForm() {
   const [startTime, setStartTime] = useState()
   const [endTime, setEndTime] = useState()
 
+  const { dispatch } = useStrawberry()
+
   const submitHandler = async () => {
     var log = {
       category,
@@ -40,6 +43,10 @@ export default function QuicklogForm() {
       await quickAddLog(log)
       setIsSubmitting(false)
       resetForm()
+      const response = await scrapeLogs()
+      const logs_ = response.data.data
+      logs_.sort((a, b) => (a.start_time > b.start_time ? -1 : 1))
+      dispatch({ type: 'set_logs', payload: logs_ })
     } catch (err) {
       toast.error(err.message)
     }

@@ -2,7 +2,7 @@ import { ImBook } from 'react-icons/im'
 import React, { useEffect, useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
 
-export const CardTitle = ({ search, setSearch }) => {
+export const CardTitle = ({ search, setSearch, onRefreshLogs }) => {
   const [siasistenId, setSiasistenId] = useState('')
 
   useEffect(() => {
@@ -21,7 +21,10 @@ export const CardTitle = ({ search, setSearch }) => {
           Live Page
         </a>
       </div>
-      <div>
+      <div className="flex">
+        <div className="btn btn-ghost" onClick={() => onRefreshLogs()}>
+          refresh
+        </div>
         <div class="relative w-80">
           <input
             type="text"

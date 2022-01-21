@@ -3,15 +3,15 @@ import {
   fetchYearlyEarnings,
   scrapeAndFetch,
 } from '@api/strawberry'
+import { CURRENT_MONTH, CURRENT_YEAR } from 'services/constants'
 import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 import React, { useEffect, useState } from 'react'
-import { CURRENT_MONTH, CURRENT_YEAR } from 'services/constants'
-import OfferCard from './Listing'
+
+import { FullStats } from './Stats'
 import { LogsSection } from './Logs'
 import { QuicklogSection } from './Quicklog'
-import QuicklogCard from './Quicklog/QuicklogCard'
 import { ReportCard } from './ReportCard'
-import { FullStats, ThisMonthStats } from './Stats'
+import OfferCard from './Listing'
 
 export default function index() {
   const [isLoadingListings, setLoadingListings] = useState(true)
@@ -22,7 +22,7 @@ export default function index() {
   const [tab, setTab] = useState(0)
   const [currentMonthData, setCurrentData] = useState({})
   const {
-    strawberry: { reports },
+    strawberry: { logs, reports },
     dispatch,
   } = useStrawberry()
 
@@ -32,6 +32,10 @@ export default function index() {
     setLoadingListings(false)
   }, [])
 
+  useEffect(() => {
+    setTab(localStorage.getItem('strawberry_is_working') == 'true' ? 0 : 1)
+  }, [])
+
   useEffect(async () => {
     const { data: result } = await fetchMonthlyEarnings(
       CURRENT_MONTH,
@@ -39,15 +43,14 @@ export default function index() {
     )
     setCurrentData(result)
     setFetchingMonthly(false)
-    return
-  }, [])
+  }, [logs])
 
   useEffect(async () => {
     setFetchingYearly(true)
     const { data: raw } = await fetchYearlyEarnings(year)
     dispatch({ type: 'set_reports', payload: raw.data })
     setFetchingYearly(false)
-  }, [year])
+  }, [logs, year])
 
   const calculateStats = () => {
     const workingMonths = reports.filter((x) => x.earnings > 0)
@@ -69,7 +72,14 @@ export default function index() {
         {...{ currentMonthData, isLoading: isFetchingMonthly, tab, setTab }}
       />
       <ReportCard {...{ isFetching: isFetchingYearly, year, setYear }} />
-      {tab ? <OfferCard isLoading={isLoadingListings} /> : <LogsSection />}
+      {tab ? (
+        <OfferCard isLoading={isLoadingListings} />
+      ) : (
+        <LogsSection
+          isLoading={isFetchingMonthly}
+          setIsLoading={setFetchingMonthly}
+        />
+      )}
     </div>
   )
 }
