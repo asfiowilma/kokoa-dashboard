@@ -6,7 +6,12 @@ import { Detailed } from './Detailed'
 import { LineChart } from './LineChart'
 import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 
-export const ReportCard = ({ isFetching, year, setYear }) => {
+export const ReportCard = ({
+  isFetching,
+  year,
+  setYear,
+  refreshYearlyEarning,
+}) => {
   const {
     strawberry: { reports },
   } = useStrawberry()
@@ -38,7 +43,10 @@ export const ReportCard = ({ isFetching, year, setYear }) => {
               Detailed
             </div>
           </div>
-          <button className={`btn btn-sm btn-ghost ${isFetching && 'loading'}`}>
+          <button
+            onClick={() => refreshYearlyEarning()}
+            className={`btn btn-sm btn-ghost ${isFetching && 'loading'}`}
+          >
             {isFetching ? 'loading' : 'refresh'}
           </button>
         </div>

@@ -45,12 +45,16 @@ export default function index() {
     setFetchingMonthly(false)
   }, [logs])
 
-  useEffect(async () => {
+  useEffect(() => {
+    refreshYearlyEarning()
+  }, [logs, year])
+
+  const refreshYearlyEarning = async () => {
     setFetchingYearly(true)
     const { data: raw } = await fetchYearlyEarnings(year)
     dispatch({ type: 'set_reports', payload: raw.data })
     setFetchingYearly(false)
-  }, [logs, year])
+  }
 
   const calculateStats = () => {
     const workingMonths = reports.filter((x) => x.earnings > 0)
@@ -71,7 +75,14 @@ export default function index() {
       <QuicklogSection
         {...{ currentMonthData, isLoading: isFetchingMonthly, tab, setTab }}
       />
-      <ReportCard {...{ isFetching: isFetchingYearly, year, setYear }} />
+      <ReportCard
+        {...{
+          isFetching: isFetchingYearly,
+          year,
+          setYear,
+          refreshYearlyEarning,
+        }}
+      />
       {tab ? (
         <OfferCard isLoading={isLoadingListings} />
       ) : (

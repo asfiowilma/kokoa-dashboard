@@ -49,6 +49,7 @@ export default function QuicklogForm() {
       dispatch({ type: 'set_logs', payload: logs_ })
     } catch (err) {
       toast.error(err.message)
+      setIsSubmitting(false)
     }
   }
 
