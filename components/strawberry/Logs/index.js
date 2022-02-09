@@ -2,25 +2,28 @@ import { fetchMonthlyLogs, scrapeLogs } from '@api/strawberry'
 import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import { CURRENT_MONTH, CURRENT_YEAR } from 'services/constants'
 import { CardTitle } from './CardTitle'
 import { LogsTable } from './LogsTable'
 
-export const LogsSection = ({ isLoading, setIsLoading }) => {
+export const LogsSection = () => {
   const {
     strawberry: { logs },
     dispatch,
   } = useStrawberry()
+  const [isFetchingMonthly, setFetchingMonthly] = useState(false)
   const [logsFiltered, setlogsFiltered] = useState(logs)
   const [search, setSearch] = useState('')
 
   const onRefreshLogs = async () => {
-    setIsLoading(true)
+    setFetchingMonthly(true)
     const response = await scrapeLogs()
     const logs_ = response.data.data
     logs_.sort((a, b) => (a.start_time > b.start_time ? -1 : 1))
     dispatch({ type: 'set_logs', payload: logs_ })
-    setIsLoading(false)
+    toast.success('Logs updated~')
+    setFetchingMonthly(false)
   }
 
   useEffect(() => {
@@ -44,7 +47,7 @@ export const LogsSection = ({ isLoading, setIsLoading }) => {
 
   return (
     <div className="col-span-full card bg-base-100 flex-1">
-      {isLoading ? (
+      {isFetchingMonthly ? (
         <div className="w-full h-full flex items-center justify-center">
           <img
             src={process.env.BACKEND_URL + '/kokoa-logo.png'}

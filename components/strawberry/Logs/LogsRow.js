@@ -23,7 +23,9 @@ export const LogsRow = ({
           {category}
         </div>
       </td>
-      <td className="text-left">{description}</td>
+      <td className="text-left text-sm" style={{ whiteSpace: 'normal' }}>
+        {description}
+      </td>
       <td className="text-right">{numberToRupiah(work_earnings)}</td>
       <td>{status}</td>
     </tr>

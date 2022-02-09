@@ -16,7 +16,9 @@ export const LogsTable = ({ logs }) => {
           <th>Status</th>
         </tr>
       </thead>
-      <tbody>{logs && logs.map((log) => <LogsRow {...log} />)}</tbody>
+      <tbody>
+        {logs && logs.map((log) => <LogsRow key={log.start_time} {...log} />)}
+      </tbody>
     </table>
   )
 }
