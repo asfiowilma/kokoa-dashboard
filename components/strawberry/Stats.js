@@ -3,24 +3,13 @@ import { numberToRupiah } from 'services/utils/numberToRupiah'
 
 export const ThisMonthStats = ({
   currentMonthData: { work_hours, earnings },
-  isLoading,
 }) => {
   return (
     <div className="stats">
       <div className="stat bg-secondary text-secondary-content">
-        {isLoading ? (
-          <img
-            src={process.env.BACKEND_URL + '/kokoa-logo.png'}
-            alt="loader"
-            className="animate-pulse h-16"
-          />
-        ) : (
-          <>
-            <div className="stat-value">{work_hours} hours</div>
-            <div className="stat-title">of work done this month</div>
-            <div className="stat-desc">{numberToRupiah(earnings)} earned</div>
-          </>
-        )}
+        <div className="stat-value">{work_hours} hours</div>
+        <div className="stat-title">of work done this month</div>
+        <div className="stat-desc">{numberToRupiah(earnings)} earned</div>
       </div>
     </div>
   )

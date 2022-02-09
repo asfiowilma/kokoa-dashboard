@@ -14,9 +14,7 @@ import { ReportCard } from './ReportCard'
 import OfferCard from './Listing'
 
 export default function index() {
-  const [isLoadingListings, setLoadingListings] = useState(true)
   const [isFetchingYearly, setFetchingYearly] = useState(true)
-  const [isFetchingMonthly, setFetchingMonthly] = useState(false)
 
   const [year, setYear] = useState(CURRENT_YEAR)
   const [tab, setTab] = useState(0)
@@ -25,12 +23,6 @@ export default function index() {
     strawberry: { logs, reports },
     dispatch,
   } = useStrawberry()
-
-  useEffect(async () => {
-    const listing = await scrapeAndFetch()
-    dispatch({ type: 'set_listings', payload: listing })
-    setLoadingListings(false)
-  }, [])
 
   useEffect(() => {
     setTab(localStorage.getItem('strawberry_is_working') == 'true' ? 0 : 1)
@@ -42,7 +34,6 @@ export default function index() {
       CURRENT_YEAR
     )
     setCurrentData(result)
-    setFetchingMonthly(false)
   }, [logs])
 
   useEffect(() => {
@@ -59,22 +50,19 @@ export default function index() {
   const calculateStats = () => {
     const workingMonths = reports.filter((x) => x.earnings > 0)
     const paidMonths = workingMonths.filter((x) => x.is_paid)
-    const stats = {
+    return {
       totalEarning: workingMonths.reduce((x, y) => x + y.earnings - 2900, 0),
       totalEarningPaid: paidMonths.reduce((x, y) => x + y.earnings - 2900, 0),
       totalWorkHours: reports.reduce((x, y) => x + y.work_hours, 0),
       workingMonths: workingMonths.length || 1,
       paidMonths: paidMonths.length || 1,
     }
-    return stats
   }
 
   return (
     <div className="grid grid-dense grid-cols-3 grid-rows-1 gap-4 w-full h-full">
       <FullStats stats={calculateStats()} />
-      <QuicklogSection
-        {...{ currentMonthData, isLoading: isFetchingMonthly, tab, setTab }}
-      />
+      <QuicklogSection {...{ currentMonthData, tab, setTab }} />
       <ReportCard
         {...{
           isFetching: isFetchingYearly,
@@ -83,14 +71,7 @@ export default function index() {
           refreshYearlyEarning,
         }}
       />
-      {tab ? (
-        <OfferCard isLoading={isLoadingListings} />
-      ) : (
-        <LogsSection
-          isLoading={isFetchingMonthly}
-          setIsLoading={setFetchingMonthly}
-        />
-      )}
+      {tab ? <OfferCard /> : <LogsSection />}
     </div>
   )
 }
