@@ -43,10 +43,12 @@ export default function QuicklogForm() {
       await quickAddLog(log)
       setIsSubmitting(false)
       resetForm()
+      toast.success('We here to DROP SOME MONEY💰💵')
       const response = await scrapeLogs()
       const logs_ = response.data.data
       logs_.sort((a, b) => (a.start_time > b.start_time ? -1 : 1))
       dispatch({ type: 'set_logs', payload: logs_ })
+      toast.success('Logs updated!')
     } catch (err) {
       toast.error(err.message)
       setIsSubmitting(false)
@@ -71,9 +73,9 @@ export default function QuicklogForm() {
         <option disabled="disabled" value={0}>
           Category
         </option>
-        {categories.map((category, i) => (
+        {categories.map((ctr, i) => (
           <option key={i} value={i < 3 ? i + 1 : i + 2}>
-            {category}
+            {ctr}
           </option>
         ))}
       </select>
