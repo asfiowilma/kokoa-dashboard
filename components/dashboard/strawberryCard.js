@@ -25,7 +25,7 @@ export default function StrawberryCard() {
               href={`https://scele.cs.ui.ac.id/course/view.php?id=${sceleID}`}
               target="_blank"
             >
-              <div class="badge badge-accent">{courseName}</div>
+              <div className="badge badge-accent">{courseName}</div>
             </a>
           ) : (
             <button className="btn btn-sm btn-ghost">refresh</button>

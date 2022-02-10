@@ -26,15 +26,15 @@ export const LogDate = ({ start_time, end_time }) => {
     <>
       <div className="text-center">
         <span className={`badge mr-2 text-white ${badge()}`}>
-          {moment(start_time).format('ddd')}
+          {moment.utc(start_time).format('ddd')}
         </span>
         <span className="text-neutral-content">
-          {moment(start_time).format('D MMM YYYY')}{' '}
+          {moment.utc(start_time).format('D MMM YYYY')}{' '}
         </span>
       </div>
       <div className="text-center">
-        {moment(start_time).utc().format('HH:mm')} -{' '}
-        {moment(end_time).utc().format('HH:mm')}
+        {moment.utc(start_time).utc().format('HH:mm')} -{' '}
+        {moment.utc(end_time).utc().format('HH:mm')}
       </div>
     </>
   )

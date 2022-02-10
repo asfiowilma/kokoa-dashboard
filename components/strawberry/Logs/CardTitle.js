@@ -25,15 +25,15 @@ export const CardTitle = ({ search, setSearch, onRefreshLogs }) => {
         <div className="btn btn-ghost" onClick={() => onRefreshLogs()}>
           refresh
         </div>
-        <div class="relative w-80">
+        <div className="relative w-80">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by desc, category, date"
-            class="w-full pr-16 input input-primary input-bordered"
+            className="w-full pr-16 input input-primary input-bordered"
           />
-          <button class="absolute top-0 right-0 rounded-l-none btn btn-primary btn-square">
+          <button className="absolute top-0 right-0 rounded-l-none btn btn-primary btn-square">
             <BiSearchAlt className="w-6 h-6" />
           </button>
         </div>
