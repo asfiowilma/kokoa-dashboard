@@ -18,6 +18,7 @@ export const LogsTable = ({ logs }) => {
       </thead>
       <tbody>
         {logs && logs.map((log) => <LogsRow key={log.start_time} {...log} />)}
+        {logs.length == 0 && "No logs found."}
       </tbody>
     </table>
   )
