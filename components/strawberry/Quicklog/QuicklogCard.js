@@ -32,7 +32,9 @@ export default function QuicklogCard() {
             Select course
           </option>
           {courseData.map((course) => (
-            <option value={course.id}>{course.name}</option>
+            <option key={course.id} value={course.id}>
+              {course.name}
+            </option>
           ))}
         </select>
         <QuicklogForm />
