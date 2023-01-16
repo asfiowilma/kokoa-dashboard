@@ -2,15 +2,14 @@ import axios from 'axios'
 import { API_URL } from '../constants'
 
 export function quickAddLog(rawLog) {
-  const { category, description, date, startTime, endTime } = rawLog
-  const dateObj = new Date(date)
-  const sTime = startTime.split(':')
-  const eTime = endTime.split(':')
+  const dateObj = new Date(rawLog.date)
+  const sTime = rawLog.startTime.split(':')
+  const eTime = rawLog.endTime.split(':')
 
   const log = {
-    id: localStorage.getItem('strawberry_course_siasisten'),
-    category: category,
-    desc: description,
+    id: rawLog.id,
+    category: rawLog.category,
+    desc: rawLog.description,
     day: dateObj.getDate().toString(),
     month: (dateObj.getMonth() + 1).toString(),
     start_hour: sTime[0],

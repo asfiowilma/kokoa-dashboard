@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { quickAddLog, scrapeLogs } from '@api/strawberry'
 import toast from 'react-hot-toast'
 import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
+import { useForm } from 'react-hook-form'
+import useStrawberryStore from 'services/hooks/useStrawberryStore'
 
 export const categories = [
   'Asistensi/Tutorial',
@@ -21,6 +23,8 @@ export const categories = [
 ]
 
 export default function QuicklogForm() {
+  const { register, handleSubmit, reset } = useForm()
+  const { activeCourse } = useStrawberryStore()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [category, setCategory] = useState(0)
   const [description, setDescription] = useState('')
@@ -29,6 +33,18 @@ export default function QuicklogForm() {
   const [endTime, setEndTime] = useState()
 
   const { dispatch } = useStrawberry()
+
+  const submitLog = (data) => {
+    console.log('🚀 ~ file: QuicklogForm.js:36 ~ submitLog ~ data', data)
+    setIsSubmitting(true)
+    quickAddLog({ ...data, id: activeCourse })
+      .then(() => {
+        reset()
+        toast.success('We here to DROP SOME MONEY💰💵')
+      })
+      .catch((err) => toast.error(err.message))
+      .finally(() => setIsSubmitting(false))
+  }
 
   const submitHandler = async () => {
     var log = {
@@ -64,11 +80,13 @@ export default function QuicklogForm() {
   }
 
   return (
-    <form onSubmit={submitHandler} className="form-control flex flex-col gap-3">
+    <form
+      onSubmit={handleSubmit(submitLog)}
+      className="form-control flex flex-col gap-3"
+    >
       <select
-        onChange={(e) => setCategory(e.target.value)}
-        value={category}
         className="select bg-stone-800 select-sm w-full"
+        {...register('category')}
       >
         <option disabled="disabled" value={0}>
           Category
@@ -80,36 +98,32 @@ export default function QuicklogForm() {
         ))}
       </select>
       <textarea
-        onChange={(e) => setDescription(e.target.value)}
-        value={description}
+        {...register('description')}
         className="textarea h-24 bg-stone-800"
         placeholder="Description"
       ></textarea>
       <input
         type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
+        {...register('date')}
         className="input flex-1 input-sm bg-stone-800"
       />
       <div className="grid grid-cols-3 gap-2">
         <input
-          value={startTime}
-          onChange={(e) => setStartTime(e.target.value)}
+          {...register('startTime')}
           type="time"
           className="input bg-stone-800 pr-2"
         />
         <input
-          value={endTime}
-          onChange={(e) => setEndTime(e.target.value)}
+          {...register('endTime')}
           type="time"
           className="input bg-stone-800 pr-2"
         />
-        <div
+        <button
+          type="submit"
           className={`btn btn-accent ${isSubmitting && 'loading'}`}
-          onClick={submitHandler}
         >
           {isSubmitting ? '' : 'submit'}
-        </div>
+        </button>
       </div>
     </form>
   )

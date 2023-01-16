@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import useStrawberryStore from 'services/hooks/useStrawberryStore'
 import QuicklogForm from './QuicklogForm'
 
 export default function QuicklogCard() {
-  const [courseName, setCourseName] = useState('')
-  const [sceleID, setSceleID] = useState('')
+  const { courseData, activeCourse, setActiveCourse } = useStrawberryStore()
+  const [course, setCourse] = useState()
 
   useEffect(() => {
-    setSceleID(localStorage.getItem('strawberry_course_scele') || '')
-    setCourseName(localStorage.getItem('strawberry_course_name') || '')
-  }, [])
+    setCourse(courseData.find((course) => course.id == activeCourse))
+  }, [activeCourse])
 
   return (
     <div className="card bg-base-100">
@@ -16,12 +16,25 @@ export default function QuicklogCard() {
         <div className="card-title flex justify-between items-center">
           <div>Quickadd Log</div>{' '}
           <a
-            href={`https://scele.cs.ui.ac.id/course/view.php?id=${sceleID}`}
+            href={`https://scele.cs.ui.ac.id/course/view.php?id=${course?.sceleId}`}
             target="_blank"
           >
-            <div className="badge badge-accent">{courseName}</div>
+            <div className="badge badge-accent">{course?.name}</div>
           </a>
         </div>
+        <select
+          name="activeCourse"
+          defaultValue={activeCourse.toString()}
+          onChange={(e) => setActiveCourse(parseInt(e.target.value))}
+          className="bg-neutral select mb-4"
+        >
+          <option value="" disabled>
+            Select course
+          </option>
+          {courseData.map((course) => (
+            <option value={course.id}>{course.name}</option>
+          ))}
+        </select>
         <QuicklogForm />
       </div>
     </div>

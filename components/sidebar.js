@@ -27,7 +27,7 @@ export function SidebarExpanded({ setExpanded }) {
     <div
       className={`flex flex-col h-full bg-base-100 rounded-box shadow-lg transition transform origin-top-left`}
     >
-      <ul className="flex-1 menu rounded-box p-4 w-72 overflow-y-auto ">
+      <ul className="flex-1 menu rounded-box p-4 w-60 overflow-y-auto ">
         <li>
           <NavLink href="/" exact>
             <AiFillHome className="w-6 h-6 mr-2" /> Dashboard
