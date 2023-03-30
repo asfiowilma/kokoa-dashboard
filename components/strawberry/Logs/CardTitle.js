@@ -1,10 +1,19 @@
 import { ImBook } from 'react-icons/im'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
 import useStrawberryStore from 'services/hooks/useStrawberryStore'
+import { scrapeOlderLogs } from '@api/strawberry'
 
 export const CardTitle = ({ search, setSearch, onRefreshLogs }) => {
   const { activeCourse } = useStrawberryStore()
+  const [isLoading, setIsLoading] = useState(false)
+
+  const onRefreshOlderLogs = async () => {
+    setIsLoading(true)
+    await scrapeOlderLogs()
+    toast.success('Scraped older logs~')
+    setIsLoading(false)
+  }
 
   return (
     <div className="card-title flex justify-between">
@@ -19,8 +28,11 @@ export const CardTitle = ({ search, setSearch, onRefreshLogs }) => {
         </a>
       </div>
       <div className="flex">
-        <div className="btn btn-ghost" onClick={() => onRefreshOlderLogs()}>
-          scrape all
+        <div
+          className={`btn btn-ghost ${isLoading ? 'loading' : ''}`}
+          onClick={() => onRefreshOlderLogs()}
+        >
+          {isLoading ? 'scraping..' : 'scrape all'}
         </div>
         <div className="btn btn-ghost" onClick={() => onRefreshLogs()}>
           refresh

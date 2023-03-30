@@ -29,11 +29,6 @@ export const LogsSection = () => {
     setFetchingMonthly(false)
   }
 
-  const onRefreshOlderLogs = async () => {
-    await scrapeOlderLogs(activeCourse)
-    toast.success('Scraped older logs~')
-  }
-
   useEffect(() => {
     if (search !== '')
       setlogsFiltered(
@@ -89,9 +84,7 @@ export const LogsSection = () => {
         </div>
       ) : (
         <div className="card-body">
-          <CardTitle
-            {...{ search, setSearch, onRefreshLogs, onRefreshOlderLogs }}
-          />
+          <CardTitle {...{ search, setSearch, onRefreshLogs }} />
           <div class="tabs tabs-boxed bg-base-100">
             {range(1, 12).map((i) => (
               <div
