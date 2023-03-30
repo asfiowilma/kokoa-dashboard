@@ -4,7 +4,7 @@ import { SkelefireContext } from '@context/SkelefireContext/SkelefireProvider'
 export default function CourseLinks() {
   const { skelefire } = useContext(SkelefireContext)
   return (
-    <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-5 md:grid-rows-none gap-4">
+    <div className="grid grid-cols-3 grid-rows-2 md:grid-cols-5 md:grid-rows-none gap-3">
       {skelefire.courses.map((course) => (
         <a
           key={course.courseID}

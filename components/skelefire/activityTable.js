@@ -20,7 +20,7 @@ export default function ActivityTable({ activities, isOverview }) {
   return (
     <div
       className={`${
-        isOverview ? 'max-h-56' : 'max-h-80'
+        isOverview ? 'max-h-64' : 'max-h-80'
       } overflow-auto scrollbar scrollbar-hidden hover:scrollbar-width-1 hover:scrollbar-track-transparent hover:scrollbar-thumb-yellow-600 hover:scrollbar-track-radius-full pr-1.5`}
     >
       <table className="table table-compact w-full text-center relative">

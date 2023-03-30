@@ -48,8 +48,7 @@ export function scrapeOlderLogs() {
   return axios.get(`${API_URL}/strawberry/get-old-logs`)
 }
 
-export function scrapeLogs() {
-  const courseId = localStorage.getItem('strawberry_course_siasisten')
+export function scrapeLogs(courseId) {
   return axios.get(`${API_URL}/strawberry/get-logs/${courseId}`)
 }
 

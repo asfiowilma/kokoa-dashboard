@@ -1,20 +1,17 @@
 import { ImBook } from 'react-icons/im'
 import React, { useEffect, useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
+import useStrawberryStore from 'services/hooks/useStrawberryStore'
 
 export const CardTitle = ({ search, setSearch, onRefreshLogs }) => {
-  const [siasistenId, setSiasistenId] = useState('')
-
-  useEffect(() => {
-    setSiasistenId(localStorage.getItem('strawberry_course_siasisten'))
-  }, [])
+  const { activeCourse } = useStrawberryStore()
 
   return (
     <div className="card-title flex justify-between">
       <div className="flex items-center">
         <ImBook className="w-6 h-6 mr-2" /> Logs
         <a
-          href={`https://siasisten.cs.ui.ac.id/log/listLogMahasiswa/${siasistenId}/`}
+          href={`https://siasisten.cs.ui.ac.id/log/listLogMahasiswa/${activeCourse}/`}
           target="_blank"
           className={`btn btn-sm ml-2 btn-secondary`}
         >
@@ -22,6 +19,9 @@ export const CardTitle = ({ search, setSearch, onRefreshLogs }) => {
         </a>
       </div>
       <div className="flex">
+        <div className="btn btn-ghost" onClick={() => onRefreshOlderLogs()}>
+          scrape all
+        </div>
         <div className="btn btn-ghost" onClick={() => onRefreshLogs()}>
           refresh
         </div>

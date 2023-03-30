@@ -8,9 +8,6 @@ export default function Index() {
   const { register, handleSubmit } = useForm()
   const { courseData, addCourseData, removeCourseData } = useStrawberryStore()
   const [isWorking, setIsWorking] = useState(false)
-  const [courseName, setCourseName] = useState('')
-  const [sceleID, setSceleID] = useState('')
-  const [siasistenID, setSiasistenID] = useState('')
 
   useEffect(() => {
     setIsWorking(localStorage.getItem('strawberry_is_working') == 'true')
@@ -22,21 +19,6 @@ export default function Index() {
   const toggleWorkingPeriod = () => {
     setIsWorking(!isWorking)
     localStorage.setItem('strawberry_is_working', !isWorking)
-  }
-
-  const sceleIdHandler = (e) => {
-    setSceleID(e.target.value)
-    localStorage.setItem('strawberry_course_scele', e.target.value)
-  }
-
-  const courseNameHandler = (e) => {
-    setCourseName(e.target.value)
-    localStorage.setItem('strawberry_course_name', e.target.value)
-  }
-
-  const siasistenIdHandler = (e) => {
-    setSiasistenID(e.target.value)
-    localStorage.setItem('strawberry_course_siasisten', e.target.value)
   }
 
   const addCourse = (data) => {
