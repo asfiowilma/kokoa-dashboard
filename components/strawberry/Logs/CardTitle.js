@@ -1,5 +1,5 @@
 import { ImBook } from 'react-icons/im'
-import React from 'react'
+import React, { useState } from 'react'
 import { BiSearchAlt } from 'react-icons/bi'
 import useStrawberryStore from 'services/hooks/useStrawberryStore'
 import { scrapeOlderLogs } from '@api/strawberry'

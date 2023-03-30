@@ -1,6 +1,5 @@
 import { fetchMonthlyLogs, scrapeLogs, scrapeOlderLogs } from '@api/strawberry'
 import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
-import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { CURRENT_MONTH, CURRENT_YEAR } from 'services/constants'
