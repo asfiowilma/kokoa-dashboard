@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import AddNewTask from './AddNewTask'
 import { COURSE } from './Courses'
 import { ImSpinner } from 'react-icons/im'
+import { ROOT_URL } from 'services/constants'
 import React from 'react'
 import { useBiscotti } from '@hooks/useBiscotti'
 import { useRouter } from 'next/router'
@@ -27,7 +28,11 @@ const Tasks = () => {
           <div className="card-title">Tasks</div>
           <div className="p-3 border-2 border-dashed border-base-content rounded-box border-opacity-50 grid place-items-center h-full">
             <div className="space-y-4 text-center">
-              <img src="/empty-inbox.svg" alt="empty" className="h-36" />
+              <img
+                src={`${ROOT_URL}/empty-inbox.svg`}
+                alt="empty"
+                className="h-36"
+              />
               <p>No Tasks Found</p>
             </div>
           </div>
@@ -57,7 +62,11 @@ const Tasks = () => {
         >
           {modules.length == 0 ? (
             <div className="space-y-4 text-center">
-              <img src="/empty-inbox.svg" alt="empty" className="h-36" />
+              <img
+                src={`${ROOT_URL}/empty-inbox.svg`}
+                alt="empty"
+                className="h-36"
+              />
               <p>No Tasks Found</p>
             </div>
           ) : (

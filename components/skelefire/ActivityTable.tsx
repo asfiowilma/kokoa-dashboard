@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import ActivityRow from './ActivityRow'
+import { ROOT_URL } from 'services/constants'
 import { useSkelefire } from '@hooks/useSkelefire'
 
 interface ActivityTableProps {
@@ -62,7 +63,7 @@ export default function ActivityTable({
       {filteredActivities.length == 0 && (
         <div className="w-full pt-6 flex justify-center">
           <img
-            src={process.env.BACKEND_URL + '/empty-inbox.svg'}
+            src={`${ROOT_URL}/empty-inbox.svg`}
             alt="empty"
             className={isOverview ? 'h-48' : 'h-60'}
           />

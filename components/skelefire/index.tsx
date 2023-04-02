@@ -5,6 +5,7 @@ import ActionButtons from './ActionButtons'
 import ActivityTable from './ActivityTable'
 import CourseTabs from './CourseTabs'
 import CoursesLinks from './CourseLinks'
+import { ROOT_URL } from 'services/constants'
 import { useSkelefire } from '@hooks/useSkelefire'
 
 export default function SkelefireComponent() {
@@ -58,7 +59,7 @@ export default function SkelefireComponent() {
   return isLoading ? (
     <div className="w-full h-full flex items-center justify-center">
       <img
-        src={process.env.BACKEND_URL + '/kokoa-logo.png'}
+        src={`${ROOT_URL}/kokoa-logo.png`}
         alt="loader"
         className="animate-pulse"
       />

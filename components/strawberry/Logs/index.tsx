@@ -1,4 +1,4 @@
-import { CURRENT_MONTH, CURRENT_YEAR } from 'services/constants'
+import { CURRENT_MONTH, CURRENT_YEAR, ROOT_URL } from 'services/constants'
 import React, { useEffect, useState } from 'react'
 import { fetchMonthlyLogs, scrapeLogs } from '@api/strawberry'
 
@@ -75,7 +75,7 @@ export const LogsSection = () => {
       {isFetchingMonthly ? (
         <div className="w-full h-full flex items-center justify-center">
           <img
-            src={process.env.BACKEND_URL + '/kokoa-logo.png'}
+            src={`${ROOT_URL}/kokoa-logo.png`}
             alt="loader"
             className="animate-pulse"
           />

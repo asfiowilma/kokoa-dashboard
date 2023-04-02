@@ -1,4 +1,5 @@
 import { IoNotificationsOutline } from 'react-icons/io5'
+import { ROOT_URL } from 'services/constants'
 import React from 'react'
 import { useSidebar } from '@hooks/useSidebar'
 
@@ -29,7 +30,7 @@ export default function Navbar() {
       </div>
       <div className="navbar-center flex-1 mx-1 invisible sm:visible">
         <img
-          src={process.env.BACKEND_URL + '/kokoa-logo.png'}
+          src={`${ROOT_URL}/kokoa-logo.png`}
           alt="kokoa"
           className="h-10 w-10 mr-2"
         />
@@ -43,7 +44,7 @@ export default function Navbar() {
       <div className="flex-none">
         <div className="avatar">
           <div className="rounded-full w-10 h-10 m-1">
-            <img src={process.env.BACKEND_URL + '/avatar.png'} />
+            <img src={`${ROOT_URL}/avatar.png`} />
           </div>
         </div>
       </div>

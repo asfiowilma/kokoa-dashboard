@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import ActionButtons from './ActionButtons'
 import OfferTable from './ListingTable'
+import { ROOT_URL } from 'services/constants'
 import { scrapeAndFetch } from '@api/strawberry'
 import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 
@@ -24,7 +25,7 @@ export default function OfferCard() {
         {isLoadingListings ? (
           <div className="w-full h-full flex items-center justify-center">
             <img
-              src={process.env.BACKEND_URL + '/kokoa-logo.png'}
+              src={`${ROOT_URL}/kokoa-logo.png`}
               alt="loader"
               className="animate-pulse"
             />

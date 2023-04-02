@@ -1,8 +1,9 @@
-import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
+import { FaUser, FaUserCheck, FaUsers } from 'react-icons/fa'
 import React, { useEffect, useState } from 'react'
-import { FaUser, FaUsers, FaUserCheck } from 'react-icons/fa'
 
 import OfferRow from './ListingRow'
+import { ROOT_URL } from 'services/constants'
+import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 
 export default function OfferTable() {
   const {
@@ -81,7 +82,7 @@ export default function OfferTable() {
       {filteredListings.length == 0 && (
         <div className="w-full pt-6 flex justify-center">
           <img
-            src={process.env.BACKEND_URL + '/empty-inbox.svg'}
+            src={`${ROOT_URL}/empty-inbox.svg`}
             alt="empty"
             className="h-60"
           />
