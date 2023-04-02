@@ -1,7 +1,8 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
+  content: [
+    './pages/**/*.{ts,tsx,js,jsx}',
+    './components/**/*.{ts,tsx,js,jsx}',
+  ],
   theme: {
     extend: {
       maxWidth: {
@@ -14,10 +15,6 @@ module.exports = {
         2: '2 2 0%',
       },
     },
-  },
-  variants: {
-    scrollbar: ['rounded'],
-    extend: {},
   },
   plugins: [require('daisyui'), require('ps-scrollbar-tailwind')],
   daisyui: {
