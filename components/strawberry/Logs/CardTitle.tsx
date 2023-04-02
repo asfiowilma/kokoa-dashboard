@@ -1,8 +1,10 @@
-import { ImBook } from 'react-icons/im'
 import React, { useState } from 'react'
+
 import { BiSearchAlt } from 'react-icons/bi'
-import useStrawberryStore from 'services/hooks/useStrawberryStore'
+import { ImBook } from 'react-icons/im'
 import { scrapeOlderLogs } from '@api/strawberry'
+import { toast } from 'react-hot-toast'
+import useStrawberryStore from 'services/hooks/useStrawberryStore'
 
 export const CardTitle = ({ search, setSearch, onRefreshLogs }) => {
   const { activeCourse } = useStrawberryStore()

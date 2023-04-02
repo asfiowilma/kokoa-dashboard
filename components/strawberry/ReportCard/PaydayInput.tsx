@@ -1,11 +1,12 @@
-import { setPayday } from '@api/strawberry'
-import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 import React, { useState } from 'react'
-import toast from 'react-hot-toast'
+
 import { IoEllipsisVerticalSharp } from 'react-icons/io5'
+import { setPayday } from '@api/strawberry'
+import toast from 'react-hot-toast'
+import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 
 export const PaydayInput = ({ id }) => {
-  const [date, setDate] = useState()
+  const [date, setDate] = useState<string>()
   const [loading, setLoading] = useState(false)
   const { dispatch } = useStrawberry()
 
@@ -24,11 +25,11 @@ export const PaydayInput = ({ id }) => {
 
   return (
     <div className="dropdown dropdown-end text-left">
-      <div tabIndex="-1" className="btn btn-xs btn-ghost">
+      <div tabIndex={0} className="btn btn-xs btn-ghost">
         <IoEllipsisVerticalSharp />
       </div>
       <ul
-        tabIndex="0"
+        tabIndex={0}
         className="p-4 shadow-lg dropdown-content text-primary-content bg-primary rounded-box w-72"
         style={{ whiteSpace: 'normal' }}
       >

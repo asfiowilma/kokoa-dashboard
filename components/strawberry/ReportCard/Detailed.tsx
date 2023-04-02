@@ -1,10 +1,9 @@
-import React from 'react'
 import { AiFillClockCircle } from 'react-icons/ai'
-import { numberToRupiah } from 'services/utils/numberToRupiah'
-import { IoEllipsisVerticalSharp } from 'react-icons/io5'
 import { PaydayInput } from './PaydayInput'
-import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
+import React from 'react'
 import moment from 'moment'
+import { numberToRupiah } from 'services/utils/numberToRupiah'
+import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 
 export const Detailed = () => {
   const {

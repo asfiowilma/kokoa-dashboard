@@ -9,7 +9,7 @@ import { QuicklogSection } from './Quicklog'
 import { ReportCard } from './ReportCard'
 import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 
-export default function index() {
+export default function StrawberryComponent() {
   const [isFetchingYearly, setFetchingYearly] = useState(true)
 
   const [year, setYear] = useState(CURRENT_YEAR)

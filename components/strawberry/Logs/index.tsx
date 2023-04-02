@@ -1,11 +1,12 @@
-import { fetchMonthlyLogs, scrapeLogs, scrapeOlderLogs } from '@api/strawberry'
-import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
-import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 import { CURRENT_MONTH, CURRENT_YEAR } from 'services/constants'
-import useStrawberryStore from 'services/hooks/useStrawberryStore'
+import React, { useEffect, useState } from 'react'
+import { fetchMonthlyLogs, scrapeLogs } from '@api/strawberry'
+
 import { CardTitle } from './CardTitle'
 import { LogsTable } from './LogsTable'
+import toast from 'react-hot-toast'
+import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
+import useStrawberryStore from 'services/hooks/useStrawberryStore'
 
 export const LogsSection = () => {
   const {
@@ -31,7 +32,7 @@ export const LogsSection = () => {
   useEffect(() => {
     if (search !== '')
       setlogsFiltered(
-        logs.filter(
+        logs?.filter(
           (log) =>
             log.description.toLowerCase().includes(search) ||
             log.category.toLowerCase().includes(search)
@@ -40,8 +41,9 @@ export const LogsSection = () => {
     else setlogsFiltered(logs)
   }, [search, logs])
 
-  useEffect(async () => {
-    await fetchLogsByMonth(month)
+  useEffect(() => {
+    const fetchData = async () => await fetchLogsByMonth(month)
+    fetchData()
   }, [month])
 
   const fetchLogsByMonth = async (month) => {
@@ -68,9 +70,6 @@ export const LogsSection = () => {
     'Dec',
   ]
 
-  const range = (min, max) =>
-    [...Array(max - min + 1).keys()].map((i) => i + min)
-
   return (
     <div className="col-span-full card bg-base-100 flex-1">
       {isFetchingMonthly ? (
@@ -84,13 +83,13 @@ export const LogsSection = () => {
       ) : (
         <div className="card-body">
           <CardTitle {...{ search, setSearch, onRefreshLogs }} />
-          <div class="tabs tabs-boxed bg-base-100">
-            {range(1, 12).map((i) => (
+          <div className="tabs tabs-boxed bg-base-100">
+            {Array.from({ length: 12 }).map((_, i) => (
               <div
-                onClick={() => setMonth(i)}
-                class={`tab ${month === i && 'tab-active'}`}
+                onClick={() => setMonth(i + 1)}
+                className={`tab ${month === i + 1 && 'tab-active'}`}
               >
-                {labels[i - 1]}
+                {labels[i]}
               </div>
             ))}
           </div>

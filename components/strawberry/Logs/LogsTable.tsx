@@ -1,7 +1,5 @@
-import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
-import React from 'react'
-
 import { LogsRow } from './LogsRow'
+import React from 'react'
 
 export const LogsTable = ({ logs }) => {
   return (
@@ -17,8 +15,10 @@ export const LogsTable = ({ logs }) => {
         </tr>
       </thead>
       <tbody>
-        {logs && logs.map((log) => <LogsRow key={log.start_time} {...log} />)}
-        {logs.length == 0 && "No logs found."}
+        {logs?.map((log) => (
+          <LogsRow key={log.start_time} {...log} />
+        ))}
+        {logs?.length == 0 && 'No logs found.'}
       </tbody>
     </table>
   )

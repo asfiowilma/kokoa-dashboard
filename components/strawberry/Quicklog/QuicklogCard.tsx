@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import useStrawberryStore from 'services/hooks/useStrawberryStore'
+
 import QuicklogForm from './QuicklogForm'
+import useStrawberryStore from 'services/hooks/useStrawberryStore'
 
 export default function QuicklogCard() {
   const { courseData, activeCourse, setActiveCourse } = useStrawberryStore()
-  const [course, setCourse] = useState()
+  const [course, setCourse] = useState<StrawberryCourse>()
 
   useEffect(() => {
-    setCourse(courseData.find((course) => course.id == activeCourse))
+    setCourse(courseData.find((course) => course.id == activeCourse) ?? null)
   }, [activeCourse])
 
   return (

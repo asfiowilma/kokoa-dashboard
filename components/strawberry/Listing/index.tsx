@@ -1,18 +1,21 @@
-import { scrapeAndFetch } from '@api/strawberry'
-import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 import React, { useEffect, useState } from 'react'
 
 import ActionButtons from './ActionButtons'
 import OfferTable from './ListingTable'
+import { scrapeAndFetch } from '@api/strawberry'
+import { useStrawberry } from '@context/StrawberryContext/useStrawberry'
 
 export default function OfferCard() {
   const [isLoadingListings, setLoadingListings] = useState(true)
   const { dispatch } = useStrawberry()
 
-  useEffect(async () => {
-    const listing = await scrapeAndFetch()
-    dispatch({ type: 'set_listings', payload: listing })
-    setLoadingListings(false)
+  useEffect(() => {
+    const fetchData = async () => {
+      const listing = await scrapeAndFetch()
+      dispatch({ type: 'set_listings', payload: listing })
+      setLoadingListings(false)
+    }
+    fetchData()
   }, [])
 
   return (
