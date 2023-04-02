@@ -1,6 +1,7 @@
 import BiscottiIndicators from './Indicators'
 import { ImSpinner } from 'react-icons/im'
 import Link from 'next/link'
+import { ROOT_URL } from 'services/constants'
 import { SPECIALIZATION } from './Specializations'
 import { getCoursesBySpecialization } from '@api/biscotti'
 import toKebabCase from '@utils/toKebabCase'
@@ -48,6 +49,7 @@ const Courses = () => {
               pathname,
               query: { ...query, course: toKebabCase(course.name) },
             }}
+            prefix={ROOT_URL}
             onClick={() => setActiveCourse(course)}
             replace
             className={`tab ${isActive(course.name) ? 'tab-active' : ''}`}
@@ -69,6 +71,7 @@ const Courses = () => {
                   pathname,
                   query: { ...query, course: toKebabCase(course.name) },
                 }}
+                prefix={ROOT_URL}
                 onClick={() => setActiveCourse(course)}
                 replace
                 className={`group alert flex-col items-start md:gap-2 transition cursor-pointer ${

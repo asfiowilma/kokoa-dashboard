@@ -1,4 +1,5 @@
-import { ENV } from 'services/constants'
+import { ENV, ROOT_URL } from 'services/constants'
+
 import Link from 'next/link'
 import { ReactNode } from 'react'
 import { useRouter } from 'next/router'
@@ -17,7 +18,7 @@ function NavLink({ href, exact, children, className }: NavLinkProps) {
   return (
     <Link
       href={href}
-      as={ENV == 'production' ? `/kokoa-dashboard${href}` : href}
+      prefix={ROOT_URL}
       className={`${className} ${isActive ? 'active' : ''}`}
     >
       {children}

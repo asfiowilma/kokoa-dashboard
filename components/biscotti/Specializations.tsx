@@ -4,6 +4,7 @@ import BiscottiIndicators from './Indicators'
 import { COURSE } from './Courses'
 import { ImSpinner } from 'react-icons/im'
 import Link from 'next/link'
+import { ROOT_URL } from 'services/constants'
 import { getAllSpecializations } from '@api/biscotti'
 import toKebabCase from '@utils/toKebabCase'
 import { useBiscotti } from '@hooks/useBiscotti'
@@ -58,6 +59,7 @@ const Specializations = () => {
                     course: undefined,
                   },
                 }}
+                prefix={ROOT_URL}
                 onClick={() => {
                   setActiveSpecialization(sp)
                 }}
