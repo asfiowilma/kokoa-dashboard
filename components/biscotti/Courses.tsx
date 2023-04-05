@@ -12,9 +12,8 @@ import { useRouter } from 'next/router'
 export const COURSE = 'course'
 
 const Courses = () => {
-  const { pathname, query } = useRouter()
-  const { courses, activeSpecialization, setActiveCourse, setCourses } =
-    useBiscotti()
+  const { query } = useRouter()
+  const { courses, activeSpecialization, setCourses } = useBiscotti()
   const { isLoading } = useQuery({
     queryKey: [
       COURSE,
@@ -43,19 +42,12 @@ const Courses = () => {
     <>
       <div className="md:hidden sticky top-10 w-full tabs tabs-boxed bg-base-100 -order-1">
         {courses.map((course, i) => (
-          <Link
-            key={course.id}
-            href={{
-              pathname,
-              query: { ...query, course: toKebabCase(course.name) },
-            }}
-            prefix={ROOT_URL}
-            onClick={() => setActiveCourse(course)}
-            replace
+          <CourseLink
+            course={course}
             className={`tab ${isActive(course.name) ? 'tab-active' : ''}`}
           >
             Course {i + 1}
-          </Link>
+          </CourseLink>
         ))}
       </div>
 
@@ -65,15 +57,8 @@ const Courses = () => {
 
           <div className="flex flex-col gap-3">
             {courses.map((course, i) => (
-              <Link
-                key={course.id}
-                href={{
-                  pathname,
-                  query: { ...query, course: toKebabCase(course.name) },
-                }}
-                prefix={ROOT_URL}
-                onClick={() => setActiveCourse(course)}
-                replace
+              <CourseLink
+                course={course}
                 className={`group alert flex-col items-start md:gap-2 transition cursor-pointer ${
                   isActive(course.name)
                     ? 'bg-primary text-primary-content'
@@ -103,12 +88,39 @@ const Courses = () => {
                     (course.task_counts.total || 1)
                   }
                 ></progress>
-              </Link>
+              </CourseLink>
             ))}
           </div>
         </div>
       </div>
     </>
+  )
+}
+
+interface CourseLinkProps {
+  course: BiscottiCourse
+  children: React.ReactNode
+  className?: string
+}
+
+const CourseLink = ({ course, children, className }: CourseLinkProps) => {
+  const { pathname, query } = useRouter()
+  const { setActiveCourse } = useBiscotti()
+
+  return (
+    <Link
+      key={course.id}
+      href={{
+        pathname,
+        query: { ...query, course: toKebabCase(course.name) },
+      }}
+      prefix={ROOT_URL}
+      onClick={() => setActiveCourse(course)}
+      replace
+      className={className}
+    >
+      {children}
+    </Link>
   )
 }
 

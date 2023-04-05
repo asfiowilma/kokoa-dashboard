@@ -5,6 +5,7 @@ import { COURSE } from './Courses'
 import { ImSpinner } from 'react-icons/im'
 import Link from 'next/link'
 import { ROOT_URL } from 'services/constants'
+import React from 'react'
 import { getAllSpecializations } from '@api/biscotti'
 import toKebabCase from '@utils/toKebabCase'
 import { useBiscotti } from '@hooks/useBiscotti'
@@ -13,9 +14,8 @@ import { useRouter } from 'next/router'
 export const SPECIALIZATION = 'specialization'
 
 const Specializations = () => {
-  const { pathname, query } = useRouter()
-  const { specializations, setActiveSpecialization, setSpecializations } =
-    useBiscotti()
+  const { query } = useRouter()
+  const { specializations, setSpecializations } = useBiscotti()
   const { isLoading } = useQuery({
     queryKey: ['specialization'],
     queryFn: getAllSpecializations,
@@ -38,9 +38,14 @@ const Specializations = () => {
     <>
       <div className="md:hidden flex w-full gap-3 -order-2 overflow-auto scrollbar scrollbar-hidden sticky top-0">
         {specializations.map((sp) => (
-          <div key={sp.id} className="btn btn-accent btn-sm">
+          <SpecializationLink
+            sp={sp}
+            className={`btn btn-sm ${
+              isActive(sp.name) ? 'btn-primary' : 'btn-accent'
+            } `}
+          >
             {sp.name}
-          </div>
+          </SpecializationLink>
         ))}
       </div>
 
@@ -49,21 +54,8 @@ const Specializations = () => {
           <div className="card-title">Specializations</div>
           <div className=" flex flex-col gap-3">
             {specializations.map((sp) => (
-              <Link
-                key={sp.id}
-                href={{
-                  pathname,
-                  query: {
-                    ...query,
-                    specialization: toKebabCase(sp.name),
-                    course: undefined,
-                  },
-                }}
-                prefix={ROOT_URL}
-                onClick={() => {
-                  setActiveSpecialization(sp)
-                }}
-                replace
+              <SpecializationLink
+                sp={sp}
                 className={`group alert flex-col md:gap-2 transition cursor-pointer ${
                   isActive(sp.name)
                     ? 'bg-primary text-primary-content'
@@ -87,12 +79,47 @@ const Specializations = () => {
                   }`}
                   value={sp.task_counts.completed / (sp.task_counts.total || 1)}
                 ></progress>
-              </Link>
+              </SpecializationLink>
             ))}
           </div>
         </div>
       </div>
     </>
+  )
+}
+
+interface SpecializationLinkProps {
+  sp: BiscottiSpecialization
+  children: React.ReactNode
+  className?: string
+}
+
+const SpecializationLink = ({
+  sp,
+  className,
+  children,
+}: SpecializationLinkProps) => {
+  const { pathname, query } = useRouter()
+  const { setActiveSpecialization } = useBiscotti()
+
+  return (
+    <Link
+      key={sp.id}
+      href={{
+        pathname,
+        query: {
+          ...query,
+          specialization: toKebabCase(sp.name),
+          course: undefined,
+        },
+      }}
+      prefix={ROOT_URL}
+      onClick={() => setActiveSpecialization(sp)}
+      replace
+      className={className}
+    >
+      {children}
+    </Link>
   )
 }
 
