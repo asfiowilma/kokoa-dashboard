@@ -27,7 +27,7 @@ const Stats = () => {
           <ImFlag /> Overall Progress
         </div>
         <p className="text-stone-400">
-          BYOC is {(stats?.completed / stats?.total).toFixed(2)}% complete!
+          BYOC is {(stats?.completed / stats?.total * 100).toFixed(2)}% complete!
         </p>
         <progress
           className="flex-none lg:flex-1 w-full progress progress-success bg-base-300 h-6"
