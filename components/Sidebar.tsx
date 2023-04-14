@@ -1,9 +1,10 @@
+import { AiFillHome, AiFillSetting } from 'react-icons/ai'
+import { CgChevronDoubleLeftO, CgChevronDoubleRightO } from 'react-icons/cg'
+import { GiCakeSlice, GiFire, GiSandwich, GiStrawberry } from 'react-icons/gi'
+
+import NavLink from './NavLink'
 import { useSidebar } from '@hooks/useSidebar'
 import { useSkelefire } from '@hooks/useSkelefire'
-import { AiFillHome, AiFillSetting } from 'react-icons/ai'
-import { GiFire, GiCakeSlice, GiStrawberry, GiSandwich } from 'react-icons/gi'
-import { CgChevronDoubleLeftO, CgChevronDoubleRightO } from 'react-icons/cg'
-import { NavLink } from './NavLink'
 
 interface SidebarProps {
   setIsExpanded: (to: boolean) => void
@@ -57,13 +58,13 @@ export function SidebarExpanded({ setIsExpanded }: SidebarProps) {
             <GiStrawberry className="w-6 h-6 mr-2" /> Strawberry
           </NavLink>
         </li>
+        <li className="menu-title mt-4 mb-1">
+          <span>Apps</span>
+        </li>
         <li>
           <NavLink href="/biscotti" exact>
             <GiSandwich className="w-6 h-6 mr-2" /> Biscotti
           </NavLink>
-        </li>
-        <li className="menu-title mt-4 mb-1">
-          <span>Apps</span>
         </li>
         <li>
           <NavLink href="/tiramisu" exact>
@@ -121,12 +122,12 @@ export function SidebarCollapsed({ setIsExpanded }: SidebarProps) {
             <GiStrawberry className="w-5 h-5" />
           </NavLink>
         </li>
+        <div className="divider my-0" />
         <li>
           <NavLink href="/biscotti" exact>
             <GiSandwich className="w-5 h-5" />
           </NavLink>
         </li>
-        <div className="divider my-0" />
         <li>
           <NavLink href="/tiramisu" exact>
             <GiCakeSlice className="w-5 h-5" />

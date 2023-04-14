@@ -1,6 +1,5 @@
-import { ENV, ROOT_URL } from 'services/constants'
-
 import Link from 'next/link'
+import { ROOT_URL } from 'services/constants'
 import { ReactNode } from 'react'
 import { useRouter } from 'next/router'
 
@@ -11,18 +10,21 @@ interface NavLinkProps {
   className?: string
 }
 
-function NavLink({ href, exact, children, className }: NavLinkProps) {
+export default function NavLink({
+  href,
+  exact,
+  children,
+  className,
+}: NavLinkProps) {
   const { pathname } = useRouter()
   const isActive = exact ? pathname === href : pathname.startsWith(href)
 
   return (
     <Link
-      href={href}
-      prefix={ROOT_URL}
+      href={ROOT_URL + href}
       className={`${className} ${isActive ? 'active' : ''}`}
     >
       {children}
     </Link>
   )
 }
-export { NavLink }

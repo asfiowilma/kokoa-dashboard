@@ -4,7 +4,7 @@ import { getTaskStats } from '@api/biscotti'
 import { useBiscotti } from '@hooks/useBiscotti'
 import { useQuery } from '@tanstack/react-query'
 
-const Stats = () => {
+const Stats = ({ isDashboard }: { isDashboard?: boolean }) => {
   const { stats, setStats } = useBiscotti()
   const { isLoading } = useQuery({
     queryKey: ['stats'],
@@ -21,16 +21,27 @@ const Stats = () => {
       </div>
     </div>
   ) : (
-    <div className="order-first col-span-1 md:col-span-3 card shadow-lg bg-base-100 md:card-normal">
-      <div className="card-body lg:items-center flex flex-col lg:flex-row gap-2 md:gap-4">
+    <div
+      className={`${
+        isDashboard ? '' : 'order-first'
+      } col-span-1 md:col-span-3 card shadow-lg bg-base-100 md:card-normal`}
+    >
+      <div
+        className={`card-body flex flex-col ${
+          isDashboard ? '' : 'lg:flex-row lg:items-center'
+        } gap-2 md:gap-4`}
+      >
         <div className="flex-1 md:flex-none card-title flex items-center gap-2">
           <ImFlag /> Overall Progress
         </div>
         <p className="text-stone-400">
-          BYOC is {(stats?.completed / stats?.total * 100).toFixed(2)}% complete!
+          BYOC is {((stats?.completed / stats?.total) * 100).toFixed(2)}%
+          complete!
         </p>
         <progress
-          className="flex-none lg:flex-1 w-full progress progress-success bg-base-300 h-6"
+          className={`flex-none ${
+            isDashboard ? '' : 'lg:flex-1'
+          } w-full progress progress-success bg-base-300 h-6`}
           value={stats?.completed / stats?.total}
         ></progress>
         <p className="text-right -mt-8 mr-4 z-10 md:m-0">

@@ -111,10 +111,9 @@ const CourseLink = ({ course, children, className }: CourseLinkProps) => {
     <Link
       key={course.id}
       href={{
-        pathname,
+        pathname: ROOT_URL + pathname,
         query: { ...query, course: toKebabCase(course.name) },
       }}
-      prefix={ROOT_URL}
       onClick={() => setActiveCourse(course)}
       replace
       className={className}

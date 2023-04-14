@@ -106,14 +106,13 @@ const SpecializationLink = ({
     <Link
       key={sp.id}
       href={{
-        pathname,
+        pathname: ROOT_URL + pathname,
         query: {
           ...query,
           specialization: toKebabCase(sp.name),
           course: undefined,
         },
       }}
-      prefix={ROOT_URL}
       onClick={() => setActiveSpecialization(sp)}
       replace
       className={className}
