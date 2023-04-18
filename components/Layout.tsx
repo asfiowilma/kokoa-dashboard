@@ -1,19 +1,9 @@
-import Head from 'next/head'
-
 import Sidebar from './Sidebar'
 import { Toaster } from 'react-hot-toast'
 
 export default function Layout({ children }) {
   return (
     <div>
-      <Head>
-        <title>Kokoa</title>
-        <link
-          rel="icon"
-          href={process.env.BACKEND_URL + '/kokoa-favicon.png'}
-        />
-      </Head>
-
       <div className="flex flex-col items-center w-full min-h-screen h-screen bg-neutral">
         <div className="w-full flex-1 flex px-4 md:px-8 pt-4 md:pt-8 gap-4 md:gap-6">
           <aside className="relative">
